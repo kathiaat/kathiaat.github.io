@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kathia Anaid — Portfolio</title>
-  <meta name="description" content="Kathia Anaid — designer & art director. Selected projects, about, and contact." />
+  <meta name="description" content="Kathia Anaid — Product Designer " />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -100,19 +100,20 @@
     }
 
     .slide {
-      position: absolute;
-      inset: 0;
-      width: 165px;
-      height: 210px;
-      border-radius: 10px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
-      backface-visibility: hidden;
-      background-size: cover;
-      background-position: center;
-      cursor: pointer;
-      outline: none;
-      overflow: hidden;
-    }
+  position: absolute;
+  inset: 0;
+  width: 165px;
+  height: 210px;
+  border-radius: 10px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+  backface-visibility: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
     .slide::after {
       content: attr(data-label);
       position: absolute;
@@ -129,20 +130,34 @@
     .slide:hover::after, .slide:focus-visible::after { opacity: 1; }
     .slide:focus-visible { outline: 2px solid var(--mint-strong); outline-offset: 4px; }
 
-    /* 5 slides spaced 72° apart on a wider radius so they sit far apart */
-    .slide:nth-child(1) { transform: rotateY(  0deg) translateZ(360px); background: linear-gradient(135deg,#e8e0d0,#b9a98c); }
-    .slide:nth-child(2) { transform: rotateY( 72deg) translateZ(360px); background: linear-gradient(160deg,#c8d3df,#5b6e84); }
-    .slide:nth-child(3) { transform: rotateY(144deg) translateZ(360px); background: linear-gradient(135deg,#1b1b1b,#3a3a3a); }
-    .slide:nth-child(4) { transform: rotateY(216deg) translateZ(360px); background: linear-gradient(140deg,#f3d9c9,#c98a6a); }
-    .slide:nth-child(5) { transform: rotateY(288deg) translateZ(360px); background: linear-gradient(150deg,#efe3d2,#a37e58); }
+/* 5 slides spaced 72° apart */
+.slide:nth-child(1) { 
+  transform: rotateY(0deg) translateZ(360px); 
+  background-image: url("images/Ai.png");}
+
+.slide:nth-child(2) { 
+  transform: rotateY(72deg) translateZ(360px); 
+  background-image: url("images/Branding.png");}
+
+.slide:nth-child(3) { 
+  transform: rotateY(144deg) translateZ(360px); 
+  background-image: url("images/Marketing.png");}
+
+.slide:nth-child(4) { 
+  transform: rotateY(216deg) translateZ(360px); 
+  background-image: url("images/Product-Design.png");}
+
+.slide:nth-child(5) { 
+  transform: rotateY(288deg) translateZ(360px); 
+  background-image: url("images/Experential.png"); }
 
     @media (max-width: 600px) {
-      .slide:nth-child(1) { transform: rotateY(  0deg) translateZ(260px); }
-      .slide:nth-child(2) { transform: rotateY( 72deg) translateZ(260px); }
-      .slide:nth-child(3) { transform: rotateY(144deg) translateZ(260px); }
-      .slide:nth-child(4) { transform: rotateY(216deg) translateZ(260px); }
-      .slide:nth-child(5) { transform: rotateY(288deg) translateZ(260px); }
-    }
+  .slide:nth-child(1) { transform: rotateY(0deg) translateZ(260px); }
+  .slide:nth-child(2) { transform: rotateY(72deg) translateZ(260px); }
+  .slide:nth-child(3) { transform: rotateY(144deg) translateZ(260px); }
+  .slide:nth-child(4) { transform: rotateY(216deg) translateZ(260px); }
+  .slide:nth-child(5) { transform: rotateY(288deg) translateZ(260px); }
+}
 
     /* ---------- Bottom navigation ---------- */
     .nav {
