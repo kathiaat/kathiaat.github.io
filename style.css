@@ -243,6 +243,31 @@
       margin: 0 0 14px;
     }
     .panel a.inline { border-bottom: 1px solid currentColor; }
+.panel-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.panel-close:hover {
+  background: var(--mint);
+  border-color: transparent;
+  transform: rotate(90deg);
+}
+.panel-close svg {
+  width: 12px; height: 12px;
+  stroke: #1d1d1d;
+  stroke-width: 1.6;
+  fill: none;
+}
 
     /* ---------- Selection / motion ---------- */
     ::selection { background: var(--mint); color: var(--ink); }
