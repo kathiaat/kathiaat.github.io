@@ -130,11 +130,33 @@
     .slide:focus-visible { outline: 2px solid var(--mint-strong); outline-offset: 4px; }
 
     /* 5 slides spaced 72° apart on a wider radius so they sit far apart */
-    .slide:nth-child(1) { transform: rotateY(  0deg) translateZ(360px); background: linear-gradient(135deg,#e8e0d0,#b9a98c); }
-    .slide:nth-child(2) { transform: rotateY( 72deg) translateZ(360px); background: linear-gradient(160deg,#c8d3df,#5b6e84); }
-    .slide:nth-child(3) { transform: rotateY(144deg) translateZ(360px); background: linear-gradient(135deg,#1b1b1b,#3a3a3a); }
-    .slide:nth-child(4) { transform: rotateY(216deg) translateZ(360px); background: linear-gradient(140deg,#f3d9c9,#c98a6a); }
-    .slide:nth-child(5) { transform: rotateY(288deg) translateZ(360px); background: linear-gradient(150deg,#efe3d2,#a37e58); }
+    .slide:nth-child(1) { transform: rotateY(  0deg) translateZ(360px); background-image: url("images/ai.png"); }
+.slide:nth-child(2) { 
+  transform: rotateY(72deg) translateZ(360px); 
+  background-image: url("images/branding.png");
+}
+
+.slide:nth-child(3) { 
+  transform: rotateY(144deg) translateZ(360px); 
+  background-image: url("images/marketing.png");
+}
+
+.slide:nth-child(4) { 
+  transform: rotateY(216deg) translateZ(360px); 
+  background-image: url("images/product-design.png");
+}
+
+.slide:nth-child(5) { 
+  transform: rotateY(288deg) translateZ(360px); 
+  background-image: url("images/experential.png"); 
+}
+
+.slide {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
     @media (max-width: 640px) {
       .slide:nth-child(1) { transform: rotateY(  0deg) translateZ(260px); }
