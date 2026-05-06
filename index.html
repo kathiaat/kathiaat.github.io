@@ -315,6 +315,14 @@
   </main>
 
   <script>
+
+    document.querySelectorAll('.panel-close').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const panel = btn.closest('.panel');
+    if (panel) panel.setAttribute('aria-hidden', 'true');
+  });
+});
+    
     // ---------- Bottom nav toggle (+ / x) ----------
     const body = document.body;
     const toggle = document.querySelector('.toggle');
