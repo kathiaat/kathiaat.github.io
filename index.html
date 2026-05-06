@@ -310,19 +310,11 @@
         <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </button>
       <a class="pill" href="#contact" data-target="contact">Contact</a>
-      <a class="pill" href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw==" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </main>
-
+ 
   <script>
-
-    document.querySelectorAll('.panel-close').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const panel = btn.closest('.panel');
-    if (panel) panel.setAttribute('aria-hidden', 'true');
-  });
-});
-    
     // ---------- Bottom nav toggle (+ / x) ----------
     const body = document.body;
     const toggle = document.querySelector('.toggle');
@@ -332,7 +324,7 @@
       toggle.setAttribute('aria-expanded', String(!expanded));
       toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
     });
-
+ 
     // ---------- Inline panel switching ----------
     const panels = document.querySelectorAll('.panel');
     document.querySelectorAll('.pill[data-target]').forEach(pill => {
@@ -347,10 +339,18 @@
         });
       });
     });
-
+ 
+    // close-button on each panel
+    document.querySelectorAll('.panel-close').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = btn.closest('.panel');
+        if (panel) panel.setAttribute('aria-hidden', 'true');
+      });
+    });
+ 
     // ---------- Rotating carousel ----------
     const stage = document.getElementById('stage');
-
+ 
     // pause auto-spin on hover, resume on leave
     stage.addEventListener('mouseenter', () => { stage.style.animationPlayState = 'paused'; });
     stage.addEventListener('mouseleave', () => { stage.style.animationPlayState = 'running'; });
