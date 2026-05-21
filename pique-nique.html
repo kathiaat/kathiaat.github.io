@@ -19,31 +19,33 @@
       --bg: #ffffff;
       --ink: #111111;
       --muted: #6f6f6f;
-      --rule: #ededed;
+      --rule: #d8d8d8;
       --mint: #cfe9d2;
       --mint-strong: #b9dfbe;
-      --sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      --pad: clamp(20px, 4vw, 40px);
-      --maxw: 1100px;
+      --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --jost: "Jost", system-ui, sans-serif;
+      --pad: clamp(20px, 5vw, 60px);
+      --maxw: 1120px;
     }
 
     body {
       background: var(--bg);
       color: var(--ink);
       font-family: var(--sans);
-      font-weight: 300;
+      font-weight: 400;
       font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ---------- Header ---------- */
+    /* ── Header ── */
     .site-header {
       padding: clamp(28px, 4vw, 44px) var(--pad);
       display: flex;
       justify-content: center;
     }
     .wordmark {
+      font-family: var(--jost);
       font-weight: 400;
       font-size: clamp(20px, 2.4vw, 28px);
       letter-spacing: 0.32em;
@@ -53,147 +55,115 @@
       margin: 0;
     }
 
-    /* ---------- Hero ---------- */
-    .hero {
-      width: 100%;
-      max-height: 600px;
-      overflow: hidden;
-    }
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ---------- Content ---------- */
+    /* ── Content wrapper ── */
     .content {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: clamp(40px, 6vw, 80px) var(--pad) clamp(120px, 14vh, 180px);
+      padding: clamp(12px, 2vw, 24px) var(--pad) clamp(120px, 14vh, 180px);
     }
 
-    .meta {
+    /* ── Project title ── */
+    .project-title {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    /* ── Description text ── */
+    .project-desc {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: clamp(16px, 2vw, 24px);
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      max-width: 720px;
+      margin: 0 0 clamp(32px, 5vw, 56px);
+      color: var(--ink);
+    }
+
+    /* ── Metadata row ── */
+    .meta-row {
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(14px, 2vw, 20px);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: clamp(32px, 5vw, 56px);
+    }
+    .meta-col .meta-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 0 0 4px;
+    }
+    .meta-col .meta-value {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* ── Image block ── */
+    .img-block {
+      background: transparent;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-bottom: clamp(40px, 6vw, 64px);
-      padding-bottom: clamp(32px, 4vw, 48px);
-      border-bottom: 1px solid var(--rule);
-    }
-    .meta-label {
-      font-size: 11px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0;
-    }
-    .meta h1 {
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      margin: 0;
-      line-height: 1.1;
-    }
-    .meta-tags {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin: 8px 0 0;
+      gap: 0;
+      margin-bottom: clamp(24px, 3vw, 36px);
     }
 
-    /* intro text */
-    .intro {
-      max-width: 660px;
-      font-size: clamp(16px, 1.5vw, 19px);
-      line-height: 1.7;
-      margin-bottom: clamp(48px, 7vw, 80px);
-    }
-    .intro p { margin: 0 0 1em; }
-    .intro p:last-child { margin: 0; }
-
-    /* ---------- Image sections ---------- */
-    .section {
-      margin-bottom: clamp(48px, 7vw, 80px);
-    }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 16px;
-    }
-
-    /* full-width image */
-    .img-full {
+    .img-slot {
       width: 100%;
-      border-radius: 6px;
       overflow: hidden;
+      background: transparent;
     }
-    .img-full img {
+    .img-slot img {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    /* two-column image pair */
-    .img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(8px, 1vw, 16px);
+    /* ── Quote block ── */
+    .text-block {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: clamp(18px, 2.4vw, 30px);
+      line-height: 1.35;
+      text-align: center;
+      max-width: 800px;
+      margin: clamp(40px, 6vw, 72px) auto;
+      color: var(--ink);
     }
-    .img-pair img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      display: block;
-    }
+    .text-block p { margin: 0; }
 
-    /* three-column image row */
-    .img-trio {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(8px, 1vw, 16px);
-    }
-    .img-trio img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      display: block;
-    }
-
-    /* gif/media block */
-    .img-media {
-      width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #f5f4f1;
-    }
-    .img-media img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* ---------- Project nav (prev / next) ---------- */
+    /* ── Project nav ── */
     .project-nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: clamp(32px, 4vw, 48px);
+      padding-top: clamp(28px, 4vw, 40px);
       border-top: 1px solid var(--rule);
-      margin-top: clamp(48px, 7vw, 80px);
+      margin-top: clamp(40px, 6vw, 72px);
     }
     .project-nav a {
-      font-size: 12px;
-      letter-spacing: 0.22em;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
       transition: color .2s ease;
     }
     .project-nav a:hover { color: var(--ink); }
 
-    /* ---------- Floating nav ---------- */
+    /* ── Floating nav ── */
     .floating-nav {
       position: fixed;
       bottom: clamp(20px, 3vh, 32px);
@@ -212,6 +182,7 @@
       backdrop-filter: blur(8px);
       border-radius: 999px;
       padding: 14px clamp(20px, 2.4vw, 32px);
+      font-family: var(--jost);
       font-size: 12px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -220,7 +191,6 @@
       white-space: nowrap;
     }
     .pill:hover { background: #fafafa; border-color: #c4c4c4; transform: translateY(-1px); }
-
     .toggle {
       width: 52px; height: 52px;
       border-radius: 999px;
@@ -230,24 +200,15 @@
       justify-content: center;
       transition: background .25s ease, transform .25s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
       flex-shrink: 0;
-      box-shadow: 0 6px 20px rgba(143, 199, 154, .35);
+      box-shadow: 0 6px 20px rgba(143,199,154,.35);
     }
     .toggle:hover { background: var(--mint-strong); transform: rotate(90deg); }
     .toggle svg { width: 18px; height: 18px; stroke: #1d1d1d; stroke-width: 1.5; fill: none; }
-
     body[data-nav="expanded"] .toggle { width: 44px; height: 44px; box-shadow: 0 4px 12px rgba(143,199,154,.3); }
     body[data-nav="expanded"] .toggle svg { width: 16px; height: 16px; }
-
     body[data-nav="collapsed"] .pill {
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      width: 0;
-      padding: 0;
-      border: 0;
-      margin: 0;
-      overflow: hidden;
-      white-space: nowrap;
+      opacity: 0; transform: translateY(8px); pointer-events: none;
+      width: 0; padding: 0; border: 0; margin: 0; overflow: hidden; white-space: nowrap;
     }
     body[data-nav="collapsed"] .toggle .x { display: none; }
     body[data-nav="expanded"]  .toggle .plus { display: none; }
@@ -257,10 +218,9 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
-
-    @media (max-width: 640px) {
-      .img-pair, .img-trio { grid-template-columns: 1fr; }
-      .wordmark { letter-spacing: 0.24em; gap: 18px; }
+    @media (max-width: 540px) {
+      .meta-row { grid-template-columns: 1fr 1fr; }
+      .wordmark  { letter-spacing: 0.24em; gap: 18px; }
     }
   </style>
 </head>
@@ -268,84 +228,75 @@
 
   <header class="site-header">
     <a href="index.html" aria-label="Home">
-      <h1 class="wordmark">
-        <span>Kathia</span>
-        <span>Anaid</span>
-      </h1>
+      <h1 class="wordmark"><span>Kathia</span><span>Anaid</span></h1>
     </a>
   </header>
 
-  <!-- Hero image -->
-  <div class="hero">
-    <img src="images/pn/1-Header.png" alt="Pique Nique — hero visual" />
-  </div>
-
   <div class="content">
 
-    <!-- Project meta -->
-    <div class="meta">
-      <p class="meta-label">05 / Case Study</p>
-      <h1>Pique Nique</h1>
-      <p class="meta-tags">Identity · Packaging · Web Design</p>
-    </div>
+    <!-- Project title -->
+    <p class="project-title">Pique Nique</p>
 
-    <!-- Intro -->
-    <div class="intro">
-      <p>A full brand identity for Pique Nique — from visual language and typography to packaging and digital presence. The work spans logo system, print collateral, and a website that brings the brand to life across touchpoints.</p>
-    </div>
+    <!-- Description -->
+    <p class="project-desc">A full brand identity — from visual language and typography to packaging and digital presence. The work spans logo system, print collateral, and a website that brings the brand to life across every touchpoint.</p>
 
-    <!-- Moodboard -->
-    <div class="section">
-      <p class="section-label">Moodboard</p>
-      <div class="img-full">
-        <img src="images/pn/2-Moodboard.png" alt="Pique Nique moodboard" loading="lazy" />
+    <!-- Metadata row -->
+    <div class="meta-row">
+      <div class="meta-col">
+        <p class="meta-label">Client</p>
+        <p class="meta-value">Pique Nique</p>
+      </div>
+      <div class="meta-col">
+        <p class="meta-label">Year</p>
+        <p class="meta-value">2025</p>
+      </div>
+      <div class="meta-col">
+        <p class="meta-label">Role</p>
+        <p class="meta-value">Identity<br>Packaging<br>Creative Direction<br>Web Design</p>
       </div>
     </div>
 
-    <!-- Typography -->
-    <div class="section">
-      <p class="section-label">Typography</p>
-      <div class="img-full">
-        <img src="images/pn/3-Typography.png" alt="Pique Nique typography system" loading="lazy" />
+    <!-- ── Image block 1 ── -->
+    <div class="img-block">
+
+      <div class="img-slot">
+        <img src="PN/1-Header.png" alt="Pique Nique header" loading="lazy" />
       </div>
+
+      <div class="img-slot">
+        <img src="PN/2.Moodboard.png" alt="Pique Nique moodboard" loading="lazy" />
+      </div>
+
     </div>
 
-    <!-- Visual / Firefly -->
-    <div class="section">
-      <div class="img-full">
-        <img src="images/pn/4-Firefly.png" alt="Pique Nique brand visual" loading="lazy" />
-      </div>
+    <!-- ── Quote ── -->
+    <div class="text-block">
+      <p>A brand built around the pleasure of gathering — refined, playful, and rooted in the joy of the everyday.</p>
     </div>
 
-    <!-- Packaging -->
-    <div class="section">
-      <p class="section-label">Packaging</p>
-      <div class="img-full">
-        <img src="images/pn/5-Envelope.png" alt="Pique Nique envelope and packaging" loading="lazy" />
-      </div>
-    </div>
+    <!-- ── Image block 2 ── -->
+    <div class="img-block">
 
-    <!-- Mobile -->
-    <div class="section">
-      <p class="section-label">Mobile</p>
-      <div class="img-full">
-        <img src="images/pn/6-Mobile.png" alt="Pique Nique mobile website" loading="lazy" />
+      <div class="img-slot">
+        <img src="PN/3.Typography.png" alt="Pique Nique typography" loading="lazy" />
       </div>
-    </div>
 
-    <!-- Tape / detail -->
-    <div class="section">
-      <div class="img-full">
-        <img src="images/pn/7-Tape.png" alt="Pique Nique brand detail" loading="lazy" />
+      <div class="img-slot">
+        <img src="PN/4.%20Envelope.png" alt="Pique Nique envelope" loading="lazy" />
       </div>
-    </div>
 
-    <!-- Website GIF -->
-    <div class="section">
-      <p class="section-label">Website</p>
-      <div class="img-media">
-        <img src="images/pn/website.gif" alt="Pique Nique website in motion" loading="lazy" />
+      <div class="img-slot">
+        <img src="PN/6.Mobile.png" alt="Pique Nique mobile" loading="lazy" />
       </div>
+
+      <div class="img-slot">
+        <img src="PN/7-Tape.png" alt="Pique Nique tape detail" loading="lazy" />
+      </div>
+
+      <div class="img-slot">
+        <img src="PN/8.website.gif" alt="Pique Nique website" loading="lazy" />
+      </div>
+
     </div>
 
     <!-- Project nav -->
@@ -356,13 +307,13 @@
 
   </div>
 
-  <!-- Floating bottom nav -->
+  <!-- Floating nav -->
   <nav class="floating-nav" aria-label="Sections">
     <a class="pill" href="index.html">Home</a>
     <a class="pill" href="projects.html">Projects</a>
     <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
-      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <svg class="x"    viewBox="0 0 24 24" aria-hidden="true"><line x1="6"  y1="6"  x2="18" y2="18"/><line x1="18" y1="6"  x2="6"  y2="18"/></svg>
+      <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5"  x2="12" y2="19"/><line x1="5"  y1="12" x2="19" y2="12"/></svg>
     </button>
     <a class="pill" href="mailto:kathiaawork@gmail.com">Contact</a>
     <a class="pill" href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">Instagram</a>
