@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POGO — Kathia Anaid</title>
+  <meta name="description" content="POGO — Branding & Website by Kathia Anaid" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; background: none; border: none; cursor: pointer; padding: 0; color: inherit; }
+
+    :root {
+      --bg: #ffffff;
+      --ink: #111111;
+      --muted: #6f6f6f;
+      --rule: #ededed;
+      --mint: #cfe9d2;
+      --mint-strong: #b9dfbe;
+      --sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --pad: clamp(20px, 4vw, 40px);
+      --maxw: 1100px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-header {
+      padding: clamp(28px, 4vw, 44px) var(--pad);
+      display: flex;
+      justify-content: center;
+    }
+    .wordmark {
+      font-weight: 400;
+      font-size: clamp(20px, 2.4vw, 28px);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      display: flex;
+      gap: clamp(24px, 4vw, 48px);
+      margin: 0;
+    }
+
+    .hero {
+      width: 100%;
+      max-height: 600px;
+      overflow: hidden;
+      background: #111;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Placeholder hero when no image is set */
+    .hero-placeholder {
+      width: 100%;
+      height: 480px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .content {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 80px) var(--pad) clamp(120px, 14vh, 180px);
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: clamp(40px, 6vw, 64px);
+      padding-bottom: clamp(32px, 4vw, 48px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .meta-label {
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+    .meta h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin: 0;
+      line-height: 1.1;
+    }
+    .meta-tags {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+
+    .intro {
+      max-width: 660px;
+      font-size: clamp(16px, 1.5vw, 19px);
+      line-height: 1.7;
+      margin-bottom: clamp(48px, 7vw, 80px);
+    }
+    .intro p { margin: 0 0 1em; }
+    .intro p:last-child { margin: 0; }
+
+    .section {
+      margin-bottom: clamp(48px, 7vw, 80px);
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    .img-full {
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .img-full img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .img-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1vw, 16px);
+    }
+    .img-pair img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .img-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px, 1vw, 16px);
+    }
+    .img-trio img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .img-media {
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f5f4f1;
+    }
+    .img-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Image placeholder blocks (remove once real images are added) */
+    .img-placeholder {
+      width: 100%;
+      background: #f0ede8;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b0a898;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .img-placeholder.tall { height: 520px; }
+    .img-placeholder.medium { height: 380px; }
+    .img-placeholder.short { height: 260px; }
+
+    .project-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: clamp(32px, 4vw, 48px);
+      border-top: 1px solid var(--rule);
+      margin-top: clamp(48px, 7vw, 80px);
+    }
+    .project-nav a {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s ease;
+    }
+    .project-nav a:hover { color: var(--ink); }
+
+    .floating-nav {
+      position: fixed;
+      bottom: clamp(20px, 3vh, 32px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 1.4vw, 18px);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pill {
+      border: 1px solid #d8d8d8;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 14px clamp(20px, 2.4vw, 32px);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      transition: opacity .3s ease, transform .3s ease, background .2s ease, border-color .2s ease;
+      white-space: nowrap;
+    }
+    .pill:hover { background: #fafafa; border-color: #c4c4c4; transform: translateY(-1px); }
+
+    .toggle {
+      width: 52px; height: 52px;
+      border-radius: 999px;
+      background: var(--mint);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .25s ease, transform .25s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(143, 199, 154, .35);
+    }
+    .toggle:hover { background: var(--mint-strong); transform: rotate(90deg); }
+    .toggle svg { width: 18px; height: 18px; stroke: #1d1d1d; stroke-width: 1.5; fill: none; }
+
+    body[data-nav="expanded"] .toggle { width: 44px; height: 44px; box-shadow: 0 4px 12px rgba(143,199,154,.3); }
+    body[data-nav="expanded"] .toggle svg { width: 16px; height: 16px; }
+
+    body[data-nav="collapsed"] .pill {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      width: 0;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    body[data-nav="collapsed"] .toggle .x { display: none; }
+    body[data-nav="expanded"]  .toggle .plus { display: none; }
+
+    ::selection { background: var(--mint); color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    @media (max-width: 640px) {
+      .img-pair, .img-trio { grid-template-columns: 1fr; }
+      .wordmark { letter-spacing: 0.24em; gap: 18px; }
+    }
+  </style>
+</head>
+<body data-nav="collapsed">
+
+  <header class="site-header">
+    <a href="index.html" aria-label="Home">
+      <h1 class="wordmark">
+        <span>Kathia</span>
+        <span>Anaid</span>
+      </h1>
+    </a>
+  </header>
+
+  <!-- Hero — replace the placeholder div with: <img src="images/pogo/hero.png" alt="POGO hero visual" /> -->
+  <div class="hero">
+    <div class="hero-placeholder">Add hero image</div>
+  </div>
+
+  <div class="content">
+
+    <div class="meta">
+      <p class="meta-label">01 / Case Study</p>
+      <h1>POGO</h1>
+      <p class="meta-tags">Branding · Website · 2025</p>
+    </div>
+
+    <div class="intro">
+      <p>Add your project overview here — the brief, the challenge, and what made this project unique.</p>
+      <p>Describe the outcome and your role.</p>
+    </div>
+
+    <!-- Section 1 — Brand Identity -->
+    <div class="section">
+      <p class="section-label">Brand Identity</p>
+      <div class="img-full">
+        <!-- <img src="images/pogo/brand-identity.png" alt="POGO brand identity" loading="lazy" /> -->
+        <div class="img-placeholder tall">Brand identity mockup</div>
+      </div>
+    </div>
+
+    <!-- Section 2 — Logo System -->
+    <div class="section">
+      <p class="section-label">Logo System</p>
+      <div class="img-pair">
+        <!-- <img src="images/pogo/logo-light.png" alt="POGO logo light" loading="lazy" />
+             <img src="images/pogo/logo-dark.png" alt="POGO logo dark" loading="lazy" /> -->
+        <div class="img-placeholder medium">Logo light</div>
+        <div class="img-placeholder medium">Logo dark</div>
+      </div>
+    </div>
+
+    <!-- Section 3 — Color & Typography -->
+    <div class="section">
+      <p class="section-label">Color & Typography</p>
+      <div class="img-full">
+        <!-- <img src="images/pogo/color-type.png" alt="POGO color and typography" loading="lazy" /> -->
+        <div class="img-placeholder medium">Color & typography system</div>
+      </div>
+    </div>
+
+    <!-- Section 4 — Collateral -->
+    <div class="section">
+      <p class="section-label">Collateral</p>
+      <div class="img-trio">
+        <!-- <img src="images/pogo/collateral-1.png" alt="POGO collateral" loading="lazy" />
+             <img src="images/pogo/collateral-2.png" alt="POGO collateral" loading="lazy" />
+             <img src="images/pogo/collateral-3.png" alt="POGO collateral" loading="lazy" /> -->
+        <div class="img-placeholder short">Collateral 1</div>
+        <div class="img-placeholder short">Collateral 2</div>
+        <div class="img-placeholder short">Collateral 3</div>
+      </div>
+    </div>
+
+    <!-- Section 5 — Website -->
+    <div class="section">
+      <p class="section-label">Website</p>
+      <div class="img-media">
+        <!-- <img src="images/pogo/website.gif" alt="POGO website" loading="lazy" /> -->
+        <div class="img-placeholder tall">Website / motion</div>
+      </div>
+    </div>
+
+    <div class="project-nav">
+      <a href="experential.html">← Experential</a>
+      <a href="pique-nique.html">Pique Nique →</a>
+    </div>
+
+  </div>
+
+  <nav class="floating-nav" aria-label="Sections">
+    <a class="pill" href="index.html">Home</a>
+    <a class="pill" href="projects.html">Projects</a>
+    <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+    <a class="pill" href="mailto:kathiaawork@gmail.com">Contact</a>
+    <a class="pill" href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+
+  <script>
+    const body = document.body;
+    const toggle = document.querySelector('.toggle');
+    toggle.addEventListener('click', () => {
+      const expanded = body.dataset.nav === 'expanded';
+      body.dataset.nav = expanded ? 'collapsed' : 'expanded';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+    });
+  </script>
+</body>
+</html>
