@@ -121,50 +121,18 @@
     .intro p { margin: 0 0 1em; }
     .intro p:last-child { margin: 0; }
 
-    .section {
-      margin-bottom: clamp(48px, 7vw, 80px);
-    }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 16px;
-    }
-
-    .img-full {
+    /* ---------- Overview image ---------- */
+    .overview-img {
       width: 100%;
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
+      margin-bottom: clamp(40px, 6vw, 64px);
     }
-    .img-full img { width: 100%; height: auto; display: block; }
-
-    .img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(8px, 1vw, 16px);
-    }
-    .img-pair img { width: 100%; height: auto; border-radius: 6px; display: block; }
-
-    .img-trio {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(8px, 1vw, 16px);
-    }
-    .img-trio img { width: 100%; height: auto; border-radius: 6px; display: block; }
-
-    .img-media {
+    .overview-img img { width: 100%; height: auto; display: block; }
+    .overview-img-placeholder {
       width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #f5f4f1;
-    }
-    .img-media img { width: 100%; height: auto; display: block; }
-
-    .img-placeholder {
-      width: 100%;
+      height: 480px;
       background: #f0ede8;
-      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -173,9 +141,136 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
     }
-    .img-placeholder.tall { height: 520px; }
-    .img-placeholder.medium { height: 380px; }
-    .img-placeholder.short { height: 260px; }
+
+    /* ---------- Accordion ---------- */
+    .accordion {
+      border-top: 1px solid var(--rule);
+      margin-bottom: clamp(48px, 7vw, 80px);
+    }
+
+    .acc-row {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .acc-trigger {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: clamp(20px, 3vw, 28px) 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+    }
+
+    .acc-num {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .acc-title {
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .acc-icon {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s ease, border-color .2s ease;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--ink);
+    }
+
+    .acc-trigger:hover .acc-icon {
+      background: var(--mint);
+      border-color: transparent;
+    }
+
+    .acc-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .4s cubic-bezier(.22,.61,.36,1);
+    }
+    .acc-body-inner {
+      overflow: hidden;
+    }
+
+    .acc-row[aria-expanded="true"] .acc-body {
+      grid-template-rows: 1fr;
+    }
+
+    .acc-row[aria-expanded="true"] .acc-icon {
+      background: var(--mint);
+      border-color: transparent;
+    }
+
+    .acc-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      padding-bottom: clamp(28px, 4vw, 48px);
+      padding-left: 72px;
+      align-items: start;
+    }
+
+    .acc-text p {
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 1.75;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    .acc-text p:last-child { margin: 0; }
+
+    .acc-text ul {
+      margin: 16px 0 0;
+      padding-left: 16px;
+    }
+    .acc-text ul li {
+      font-size: clamp(13px, 1.3vw, 15px);
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .acc-img {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f0ede8;
+    }
+    .acc-img img { width: 100%; height: auto; display: block; }
+    .acc-img-placeholder {
+      width: 100%;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b0a898;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      .acc-content {
+        grid-template-columns: 1fr;
+        padding-left: 0;
+      }
+    }
 
     .project-nav {
       display: flex;
@@ -270,11 +365,6 @@
     </a>
   </header>
 
-  <!-- Hero — replace placeholder with: <img src="images/toku/hero.png" alt="Toku hero visual" /> -->
-  <div class="hero">
-    <div class="hero-placeholder">Add hero image</div>
-  </div>
-
   <div class="content">
 
     <div class="meta">
@@ -288,55 +378,121 @@
       <p>Describe the outcome and your role.</p>
     </div>
 
-    <!-- Section 1 — Problem -->
-    <div class="section">
-      <p class="section-label">Problem</p>
-      <div class="img-full">
-        <!-- <img src="images/toku/problem.png" alt="Toku problem statement" loading="lazy" /> -->
-        <div class="img-placeholder tall">Problem / context</div>
-      </div>
+    <div class="overview-img">
+      <!-- <img src="images/toku/overview.png" alt="Toku overview" loading="lazy" /> -->
+      <div class="overview-img-placeholder">Image</div>
     </div>
 
-    <!-- Section 2 — Research -->
-    <div class="section">
-      <p class="section-label">Research</p>
-      <div class="img-pair">
-        <!-- <img src="images/toku/research-1.png" alt="Toku research" loading="lazy" />
-             <img src="images/toku/research-2.png" alt="Toku research" loading="lazy" /> -->
-        <div class="img-placeholder medium">Research insight 1</div>
-        <div class="img-placeholder medium">Research insight 2</div>
-      </div>
-    </div>
+    <div class="accordion">
 
-    <!-- Section 3 — Design System -->
-    <div class="section">
-      <p class="section-label">Design System</p>
-      <div class="img-full">
-        <!-- <img src="images/toku/design-system.png" alt="Toku design system" loading="lazy" /> -->
-        <div class="img-placeholder medium">Design system</div>
+      <!-- 01 CMS Platform -->
+      <div class="acc-row" aria-expanded="false">
+        <button class="acc-trigger" type="button">
+          <span class="acc-num">01</span>
+          <span class="acc-title">CMS Platform</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-content">
+              <div class="acc-text">
+                <p>Describe the CMS work here — the problem you solved, decisions you made, and impact.</p>
+                <ul>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                </ul>
+              </div>
+              <div class="acc-img">
+                <!-- <img src="images/toku/cms.png" alt="CMS Platform" loading="lazy" /> -->
+                <div class="acc-img-placeholder">Image</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Section 4 — Screens -->
-    <div class="section">
-      <p class="section-label">Screens</p>
-      <div class="img-trio">
-        <!-- <img src="images/toku/screen-1.png" alt="Toku screen" loading="lazy" />
-             <img src="images/toku/screen-2.png" alt="Toku screen" loading="lazy" />
-             <img src="images/toku/screen-3.png" alt="Toku screen" loading="lazy" /> -->
-        <div class="img-placeholder short">Screen 1</div>
-        <div class="img-placeholder short">Screen 2</div>
-        <div class="img-placeholder short">Screen 3</div>
+      <!-- 02 Web Design -->
+      <div class="acc-row" aria-expanded="false">
+        <button class="acc-trigger" type="button">
+          <span class="acc-num">02</span>
+          <span class="acc-title">Web Design</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-content">
+              <div class="acc-text">
+                <p>Describe the web design work here — the problem you solved, decisions you made, and impact.</p>
+                <ul>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                </ul>
+              </div>
+              <div class="acc-img">
+                <!-- <img src="images/toku/web.png" alt="Web Design" loading="lazy" /> -->
+                <div class="acc-img-placeholder">Image</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Section 5 — Prototype / Motion -->
-    <div class="section">
-      <p class="section-label">Prototype</p>
-      <div class="img-media">
-        <!-- <img src="images/toku/prototype.gif" alt="Toku prototype in motion" loading="lazy" /> -->
-        <div class="img-placeholder tall">Prototype / motion</div>
+      <!-- 03 Partnerships -->
+      <div class="acc-row" aria-expanded="false">
+        <button class="acc-trigger" type="button">
+          <span class="acc-num">03</span>
+          <span class="acc-title">Partnerships</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-content">
+              <div class="acc-text">
+                <p>Describe the partnerships work here — the problem you solved, decisions you made, and impact.</p>
+                <ul>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                </ul>
+              </div>
+              <div class="acc-img">
+                <!-- <img src="images/toku/partnerships.png" alt="Partnerships" loading="lazy" /> -->
+                <div class="acc-img-placeholder">Image</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- 04 Other -->
+      <div class="acc-row" aria-expanded="false">
+        <button class="acc-trigger" type="button">
+          <span class="acc-num">04</span>
+          <span class="acc-title">Other</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-content">
+              <div class="acc-text">
+                <p>Describe the additional work here — the problem you solved, decisions you made, and impact.</p>
+                <ul>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                  <li>Key deliverable or insight</li>
+                </ul>
+              </div>
+              <div class="acc-img">
+                <!-- <img src="images/toku/other.png" alt="Other" loading="lazy" /> -->
+                <div class="acc-img-placeholder">Image</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="project-nav">
@@ -358,6 +514,7 @@
   </nav>
 
   <script>
+    // Floating nav toggle
     const body = document.body;
     const toggle = document.querySelector('.toggle');
     toggle.addEventListener('click', () => {
@@ -365,6 +522,16 @@
       body.dataset.nav = expanded ? 'collapsed' : 'expanded';
       toggle.setAttribute('aria-expanded', String(!expanded));
       toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+    });
+
+    // Accordion
+    document.querySelectorAll('.acc-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const row = trigger.closest('.acc-row');
+        const isOpen = row.getAttribute('aria-expanded') === 'true';
+        row.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        trigger.querySelector('.acc-icon').textContent = isOpen ? '+' : '−';
+      });
     });
   </script>
 </body>
