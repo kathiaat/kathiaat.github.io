@@ -132,23 +132,23 @@
 
 /* 5 slides spaced 72° apart */
 .slide:nth-child(1) { 
-  transform: rotateY(0deg) translateZ(360px); 
+  transform: rotateY(0deg) translateZ(216px); 
   background-image: url("images/Ai.png");}
 
 .slide:nth-child(2) { 
-  transform: rotateY(72deg) translateZ(360px); 
+  transform: rotateY(72deg) translateZ(216px); 
   background-image: url("images/Branding.png");}
 
 .slide:nth-child(3) { 
-  transform: rotateY(144deg) translateZ(360px); 
+  transform: rotateY(144deg) translateZ(216px); 
   background-image: url("images/Marketing.png");}
 
 .slide:nth-child(4) { 
-  transform: rotateY(216deg) translateZ(360px); 
+  transform: rotateY(216deg) translateZ(216px); 
   background-image: url("images/Product-Design.png");}
 
 .slide:nth-child(5) { 
-  transform: rotateY(288deg) translateZ(360px); 
+  transform: rotateY(288deg) translateZ(216px); 
   background-image: url("images/Experential.png"); }
 
     @media (max-width: 600px) {
