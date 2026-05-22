@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Work — Kathia Anaid</title>
+  <meta name="description" content="AI Work — Kathia Anaid" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; background: none; border: none; cursor: pointer; padding: 0; color: inherit; }
+
+    :root {
+      --bg: #ffffff;
+      --ink: #111111;
+      --muted: #6f6f6f;
+      --rule: #ededed;
+      --mint: #cfe9d2;
+      --mint-strong: #b9dfbe;
+      --sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --pad: clamp(20px, 4vw, 40px);
+      --maxw: 1100px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      padding: clamp(28px, 4vw, 44px) var(--pad);
+      display: flex;
+      justify-content: center;
+    }
+    .wordmark {
+      font-weight: 400;
+      font-size: clamp(20px, 2.4vw, 28px);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      display: flex;
+      gap: clamp(24px, 4vw, 48px);
+      margin: 0;
+    }
+
+    /* ── Content ── */
+    .content {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 64px) var(--pad) clamp(40px, 5vw, 56px);
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: clamp(32px, 5vw, 48px);
+      padding-bottom: clamp(28px, 4vw, 40px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .meta-label { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin: 0; }
+    .meta h1    { font-size: clamp(32px, 5vw, 56px); font-weight: 400; letter-spacing: 0.04em; margin: 0; line-height: 1.1; }
+    .meta-tags  { font-size: 13px; letter-spacing: 0.08em; color: var(--muted); margin: 8px 0 0; }
+
+    .intro { max-width: 620px; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.75; }
+    .intro p { margin: 0 0 1em; }
+    .intro p:last-child { margin: 0; }
+
+    /* ── Fan Carousel ── */
+    .fan-section {
+      width: 100%;
+      padding: clamp(70px, 9vw, 120px) 0 clamp(40px, 5vw, 56px);
+      background: #ffffff;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .fan-viewport {
+      width: 100%;
+      perspective: 1100px;
+      perspective-origin: 18% 50%;
+    }
+
+    .fan-stage {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      transform-style: preserve-3d;
+      cursor: grab;
+      outline: none;
+    }
+    .fan-stage.dragging { cursor: grabbing; }
+
+    /* JS controls transform entirely — only transition opacity & shadow here */
+    .fan-card {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      margin-top: -150px;
+      width: 200px;
+      height: 300px;
+      border-radius: 18px;
+      overflow: hidden;
+      outline: none;
+      box-shadow: 0 22px 55px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.10);
+      transition: box-shadow .35s ease, opacity .25s ease;
+      will-change: transform;
+    }
+    .fan-card.is-front { cursor: pointer; }
+    .fan-card:not(.is-front) { cursor: pointer; }
+
+    .fan-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .card-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #e6e3db, #d2cfc7);
+      color: #aaa8a0;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* ── Fan Controls (prev / next) ── */
+    .fan-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: clamp(24px, 4vw, 36px) var(--pad) 0;
+    }
+
+    .fan-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(6px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease, opacity .2s ease;
+      flex-shrink: 0;
+    }
+    .fan-btn svg { width: 18px; height: 18px; stroke: var(--ink); stroke-width: 1.8; fill: none; }
+    .fan-btn:hover:not(:disabled) { background: #fff; border-color: rgba(0,0,0,.26); transform: scale(1.06); }
+    .fan-btn:disabled { opacity: 0.28; cursor: default; pointer-events: none; }
+
+    .fan-hint {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(8,8,8,.90);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+
+    .lb-img {
+      max-width: min(90vw, 1000px);
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 40px 120px rgba(0,0,0,.5);
+    }
+
+    .lb-close {
+      position: fixed;
+      top: 22px; right: 22px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+      flex-shrink: 0;
+    }
+    .lb-close svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 1.8; fill: none; }
+    .lb-close:hover { background: rgba(255,255,255,.26); transform: rotate(90deg); }
+
+    /* ── Project nav ── */
+    .project-nav {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(32px,4vw,48px) var(--pad) clamp(100px,14vh,160px);
+      border-top: 1px solid var(--rule);
+    }
+    .project-nav a { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); transition: color .2s ease; }
+    .project-nav a:hover { color: var(--ink); }
+
+    /* ── Floating nav ── */
+    .floating-nav {
+      position: fixed;
+      bottom: clamp(20px,3vh,32px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: clamp(10px,1.4vw,18px);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pill {
+      border: 1px solid #d8d8d8;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 14px clamp(20px,2.4vw,32px);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      transition: opacity .3s ease, transform .3s ease, background .2s ease, border-color .2s ease;
+      white-space: nowrap;
+    }
+    .pill:hover { background: #fafafa; border-color: #c4c4c4; transform: translateY(-1px); }
+    .toggle {
+      width: 52px; height: 52px;
+      border-radius: 999px;
+      background: var(--mint);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background .25s ease, transform .25s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(143,199,154,.35);
+    }
+    .toggle:hover { background: var(--mint-strong); transform: rotate(90deg); }
+    .toggle svg { width: 18px; height: 18px; stroke: #1d1d1d; stroke-width: 1.5; fill: none; }
+    body[data-nav="expanded"] .toggle { width: 44px; height: 44px; box-shadow: 0 4px 12px rgba(143,199,154,.3); }
+    body[data-nav="expanded"] .toggle svg { width: 16px; height: 16px; }
+    body[data-nav="collapsed"] .pill {
+      opacity: 0; transform: translateY(8px); pointer-events: none;
+      width: 0; padding: 0; border: 0; margin: 0; overflow: hidden; white-space: nowrap;
+    }
+    body[data-nav="collapsed"] .toggle .x  { display: none; }
+    body[data-nav="expanded"]  .toggle .plus { display: none; }
+
+    ::selection { background: var(--mint); color: var(--ink); }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+    @media (max-width: 600px) {
+      .fan-stage { height: 300px; }
+      .fan-card  { width: 130px; height: 200px; margin-top: -100px; border-radius: 12px; }
+      .fan-section { padding-top: 50px; }
+    }
+  </style>
+</head>
+<body data-nav="collapsed">
+
+  <header class="site-header">
+    <a href="index.html" aria-label="Home">
+      <h1 class="wordmark"><span>Kathia</span><span>Anaid</span></h1>
+    </a>
+  </header>
+
+  <div class="content">
+    <div class="meta">
+      <p class="meta-label">01 / Case Study</p>
+      <h1>Artificial Intelligence</h1>
+      <p class="meta-tags">AI Design · Generative · UX/UI</p>
+    </div>
+    <div class="intro">
+      <p>Add your AI project overview here — the brief, the challenge, and what made this work unique.</p>
+      <p>Describe your process and the outcome.</p>
+    </div>
+  </div>
+
+  <!-- ── Fan Carousel ──────────────────────────────────────────────────────
+       To add images: for each .fan-card, uncomment the <img> line and
+       delete the <div class="card-ph"> below it.
+       Add more images by duplicating any .fan-card block.
+  ──────────────────────────────────────────────────────────────────────── -->
+  <section class="fan-section" aria-label="AI Work Gallery">
+    <div class="fan-viewport">
+      <div class="fan-stage" id="fanStage" tabindex="0" role="region" aria-label="Image gallery — drag or use arrow keys">
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 1">
+          <!-- <img src="images/ai/1.jpg" alt="AI Work 1" loading="lazy" /> -->
+          <div class="card-ph">01</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 2">
+          <!-- <img src="images/ai/2.jpg" alt="AI Work 2" loading="lazy" /> -->
+          <div class="card-ph">02</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 3">
+          <!-- <img src="images/ai/3.jpg" alt="AI Work 3" loading="lazy" /> -->
+          <div class="card-ph">03</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 4">
+          <!-- <img src="images/ai/4.jpg" alt="AI Work 4" loading="lazy" /> -->
+          <div class="card-ph">04</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 5">
+          <!-- <img src="images/ai/5.jpg" alt="AI Work 5" loading="lazy" /> -->
+          <div class="card-ph">05</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 6">
+          <!-- <img src="images/ai/6.jpg" alt="AI Work 6" loading="lazy" /> -->
+          <div class="card-ph">06</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 7">
+          <!-- <img src="images/ai/7.jpg" alt="AI Work 7" loading="lazy" /> -->
+          <div class="card-ph">07</div>
+        </div>
+
+        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 8">
+          <!-- <img src="images/ai/8.jpg" alt="AI Work 8" loading="lazy" /> -->
+          <div class="card-ph">08</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Prev / Next controls -->
+    <div class="fan-controls">
+      <button class="fan-btn" id="fanPrev" aria-label="Previous image" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <span class="fan-hint">drag · click to open</span>
+      <button class="fan-btn" id="fanNext" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lb-close" id="lbClose" aria-label="Close preview">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/>
+        <line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+    <img class="lb-img" id="lbImg" src="" alt="" />
+  </div>
+
+  <div class="project-nav">
+    <a href="projects.html">← All Work</a>
+    <a href="toku.html">Toku →</a>
+  </div>
+
+  <nav class="floating-nav" aria-label="Sections">
+    <a class="pill" href="index.html">Home</a>
+    <a class="pill" href="projects.html">Projects</a>
+    <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <svg class="x"    viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+    <a class="pill" href="mailto:kathiaawork@gmail.com">Contact</a>
+    <a class="pill" href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+
+  <script>
+  /* ════════════════════════════════════════════
+     Floating nav toggle
+  ════════════════════════════════════════════ */
+  (function () {
+    const body   = document.body;
+    const toggle = document.querySelector('.toggle');
+    toggle.addEventListener('click', () => {
+      const exp = body.dataset.nav === 'expanded';
+      body.dataset.nav = exp ? 'collapsed' : 'expanded';
+      toggle.setAttribute('aria-expanded', String(!exp));
+      toggle.setAttribute('aria-label', exp ? 'Open menu' : 'Close menu');
+    });
+  })();
+
+  /* ════════════════════════════════════════════
+     Lightbox
+  ════════════════════════════════════════════ */
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lbImg');
+  const lbClose = document.getElementById('lbClose');
+
+  function openLightbox(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { lbImg.src = ''; }, 320);
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
+  });
+
+  /* ════════════════════════════════════════════
+     Interactive Fan Carousel
+  ════════════════════════════════════════════ */
+  (function () {
+    const stage    = document.getElementById('fanStage');
+    const cards    = [...stage.querySelectorAll('.fan-card')];
+    const btnPrev  = document.getElementById('fanPrev');
+    const btnNext  = document.getElementById('fanNext');
+    const N        = cards.length;
+
+    /* ── Layout params (recomputed on resize) ── */
+    let STRIDE, START_X, CARD_W;
+
+    function initLayout() {
+      const W      = stage.offsetWidth;
+      const mobile = window.innerWidth <= 600;
+      CARD_W  = mobile ? 130 : 200;
+      // spread cards across ~88% of the stage width
+      STRIDE  = Math.max(CARD_W * 0.82, (W * 0.88) / (N - 1));
+      const totalSpread = (N - 1) * STRIDE;
+      START_X = Math.max(16, (W - CARD_W - totalSpread) / 2);
+    }
+
+    /* ── Current state ── */
+    let offset       = 0;   // float – current rendered position
+    let targetOffset = 0;   // float – where we're snapping to
+    let rafId        = null;
+    let hoveredIdx   = -1;
+
+    /* ── Apply transform to one card ── */
+    function setCard(card, i, currentOffset) {
+      const rel = i - currentOffset;            // 0 = front/hero card
+      const t   = Math.max(0, rel) / (N - 1);  // 0‒1 for angle/depth calc
+
+      const x  = START_X + rel * STRIDE;
+      const ry = t * 65;                         // rotateY: 0° (front) → 65° (back)
+      const tz = -(t * 80);                      // translateZ: 0 → -80 px
+
+      /* hover lift only when not dragging and card is visible */
+      const lift = (!isDragging && i === hoveredIdx && rel > -0.5) ? ' translateY(-22px) scale(1.08)' : '';
+
+      card.style.transform     = `translateX(${x}px) translateZ(${tz}px) rotateY(${ry}deg)${lift}`;
+      card.style.opacity       = rel < 0 ? Math.max(0, 1 + rel * 3).toFixed(3) : '1';
+      card.style.zIndex        = String(Math.round(N - Math.max(0, rel)));
+      card.style.pointerEvents = rel >= -0.8 ? 'auto' : 'none';
+      card.style.boxShadow     = (i === Math.round(currentOffset) && !isDragging)
+        ? '0 28px 70px rgba(0,0,0,.24), 0 6px 16px rgba(0,0,0,.12)'
+        : '0 22px 55px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.10)';
+
+      /* mark the hero card so CSS can style it */
+      card.classList.toggle('is-front', Math.abs(rel) < 0.5);
+    }
+
+    function render(currentOffset) {
+      cards.forEach((card, i) => setCard(card, i, currentOffset));
+    }
+
+    /* ── Smooth lerp animation ── */
+    function animateTo(target) {
+      targetOffset = Math.max(0, Math.min(N - 1, target));
+      if (rafId) cancelAnimationFrame(rafId);
+      function step() {
+        offset += (targetOffset - offset) * 0.13;
+        render(offset);
+        rafId = Math.abs(targetOffset - offset) > 0.001
+          ? requestAnimationFrame(step)
+          : (render(offset = targetOffset), null);
+      }
+      rafId = requestAnimationFrame(step);
+      updateButtons();
+    }
+
+    /* ── Prev / Next buttons ── */
+    function updateButtons() {
+      const idx = Math.round(targetOffset);
+      btnPrev.disabled = idx <= 0;
+      btnNext.disabled = idx >= N - 1;
+    }
+
+    btnPrev.addEventListener('click', () => animateTo(Math.round(targetOffset) - 1));
+    btnNext.addEventListener('click', () => animateTo(Math.round(targetOffset) + 1));
+
+    /* ── Keyboard navigation ── */
+    stage.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); animateTo(Math.round(targetOffset) - 1); }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  { e.preventDefault(); animateTo(Math.round(targetOffset) + 1); }
+    });
+
+    /* ── Drag / Pointer ── */
+    let dragStartX      = null;
+    let dragStartOffset = 0;
+    let totalDragPx     = 0;
+    let isDragging      = false;
+
+    stage.addEventListener('pointerdown', e => {
+      if (rafId) cancelAnimationFrame(rafId);
+      dragStartX      = e.clientX;
+      dragStartOffset = offset;
+      totalDragPx     = 0;
+      isDragging      = false;
+      stage.setPointerCapture(e.pointerId);
+      stage.classList.add('dragging');
+    });
+
+    stage.addEventListener('pointermove', e => {
+      if (dragStartX === null) return;
+      const delta = e.clientX - dragStartX;
+      totalDragPx = Math.abs(delta);
+      if (totalDragPx > 6) {
+        isDragging = true;
+        const raw = dragStartOffset - delta / STRIDE;
+        offset = Math.max(-0.3, Math.min(N - 0.7, raw));
+        render(offset);
+      }
+    });
+
+    stage.addEventListener('pointerup', () => {
+      dragStartX = null;
+      stage.classList.remove('dragging');
+      if (isDragging) {
+        animateTo(Math.round(offset));
+      }
+      isDragging = false;
+    });
+
+    stage.addEventListener('pointercancel', () => {
+      dragStartX = null;
+      isDragging = false;
+      stage.classList.remove('dragging');
+      animateTo(Math.round(offset));
+    });
+
+    /* ── Hover lift ── */
+    cards.forEach((card, i) => {
+      card.addEventListener('mouseenter', () => { hoveredIdx = i; render(offset); });
+      card.addEventListener('mouseleave', () => { hoveredIdx = -1; render(offset); });
+    });
+
+    /* ── Click:
+         • non-front card → bring it to front
+         • front card     → open lightbox                                ── */
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        if (totalDragPx > 8) return;                   // was a drag, ignore
+        const frontIdx = Math.round(offset);
+        if (i !== frontIdx) {
+          animateTo(i);                                 // snap clicked card to front
+        } else {
+          const img = card.querySelector('img');
+          if (img) openLightbox(img.src, img.alt);     // open lightbox for front card
+        }
+      });
+
+      /* keyboard activate for each card */
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const frontIdx = Math.round(offset);
+          if (i !== frontIdx) { animateTo(i); }
+          else {
+            const img = card.querySelector('img');
+            if (img) openLightbox(img.src, img.alt);
+          }
+        }
+      });
+    });
+
+    /* ── Init ── */
+    initLayout();
+    render(0);
+    updateButtons();
+
+    window.addEventListener('resize', () => { initLayout(); render(offset); });
+  })();
+  </script>
+</body>
+</html>
