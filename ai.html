@@ -77,103 +77,50 @@
     .intro p { margin: 0 0 1em; }
     .intro p:last-child { margin: 0; }
 
-    /* ── Fan Carousel ── */
-    .fan-section {
-      width: 100%;
-      padding: clamp(70px, 9vw, 120px) 0 clamp(40px, 5vw, 56px);
-      background: #ffffff;
+    /* ── Image Grid ── */
+    .grid-section {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 var(--pad) clamp(60px, 8vw, 100px);
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .grid-item {
+      aspect-ratio: 350 / 500;
+      border-radius: 0;
       overflow: hidden;
-      user-select: none;
-    }
-
-    .fan-viewport {
-      width: 100%;
-      perspective: 1100px;
-      perspective-origin: 18% 50%;
-    }
-
-    .fan-stage {
+      cursor: pointer;
+      background: #f0ede8;
       position: relative;
-      width: 100%;
-      height: 420px;
-      transform-style: preserve-3d;
-      cursor: grab;
-      outline: none;
     }
-    .fan-stage.dragging { cursor: grabbing; }
 
-    /* JS controls transform entirely — only transition opacity & shadow here */
-    .fan-card {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      margin-top: -150px;
-      width: 200px;
-      height: 300px;
-      border-radius: 18px;
-      overflow: hidden;
-      outline: none;
-      box-shadow: 0 22px 55px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.10);
-      transition: box-shadow .35s ease, opacity .25s ease;
-      will-change: transform;
-    }
-    .fan-card.is-front { cursor: pointer; }
-    .fan-card:not(.is-front) { cursor: pointer; }
-
-    .fan-card img {
+    .grid-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform .5s cubic-bezier(.22,.61,.36,1);
       pointer-events: none;
     }
 
-    .card-ph {
+    .grid-item:hover img { transform: scale(1.04); }
+
+    .grid-placeholder {
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(145deg, #e6e3db, #d2cfc7);
-      color: #aaa8a0;
+      background: linear-gradient(145deg, #e8e5de, #d6d3cb);
+      color: #b0ada5;
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-    }
-
-    /* ── Fan Controls (prev / next) ── */
-    .fan-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      padding: clamp(24px, 4vw, 36px) var(--pad) 0;
-    }
-
-    .fan-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,.14);
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(6px);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background .2s ease, border-color .2s ease, transform .2s ease, opacity .2s ease;
-      flex-shrink: 0;
-    }
-    .fan-btn svg { width: 18px; height: 18px; stroke: var(--ink); stroke-width: 1.8; fill: none; }
-    .fan-btn:hover:not(:disabled) { background: #fff; border-color: rgba(0,0,0,.26); transform: scale(1.06); }
-    .fan-btn:disabled { opacity: 0.28; cursor: default; pointer-events: none; }
-
-    .fan-hint {
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0.7;
     }
 
     /* ── Lightbox ── */
@@ -279,10 +226,11 @@
     ::selection { background: var(--mint); color: var(--ink); }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
-    @media (max-width: 600px) {
-      .fan-stage { height: 300px; }
-      .fan-card  { width: 130px; height: 200px; margin-top: -100px; border-radius: 12px; }
-      .fan-section { padding-top: 50px; }
+    @media (max-width: 768px) {
+      .img-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .img-grid { grid-template-columns: 1fr; gap: 12px; }
     }
   </style>
 </head>
@@ -306,67 +254,59 @@
     </div>
   </div>
 
-  <!-- ── Fan Carousel ──────────────────────────────────────────────────────
-       To add images: for each .fan-card, uncomment the <img> line and
-       delete the <div class="card-ph"> below it.
-       Add more images by duplicating any .fan-card block.
+  <!-- ── Image Grid ─────────────────────────────────────────────────────────
+       3 columns × 3 rows = 9 images, each 425 × 560 px ratio.
+       To add an image: remove the <div class="grid-placeholder"> and
+       uncomment the <img> line above it. Point src= to your file.
   ──────────────────────────────────────────────────────────────────────── -->
-  <section class="fan-section" aria-label="AI Work Gallery">
-    <div class="fan-viewport">
-      <div class="fan-stage" id="fanStage" tabindex="0" role="region" aria-label="Image gallery — drag or use arrow keys">
+  <section class="grid-section" aria-label="AI Work Gallery">
+    <div class="img-grid">
 
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 1">
-          <!-- <img src="images/ai/1.jpg" alt="AI Work 1" loading="lazy" /> -->
-          <div class="card-ph">01</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 2">
-          <!-- <img src="images/ai/2.jpg" alt="AI Work 2" loading="lazy" /> -->
-          <div class="card-ph">02</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 3">
-          <!-- <img src="images/ai/3.jpg" alt="AI Work 3" loading="lazy" /> -->
-          <div class="card-ph">03</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 4">
-          <!-- <img src="images/ai/4.jpg" alt="AI Work 4" loading="lazy" /> -->
-          <div class="card-ph">04</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 5">
-          <!-- <img src="images/ai/5.jpg" alt="AI Work 5" loading="lazy" /> -->
-          <div class="card-ph">05</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 6">
-          <!-- <img src="images/ai/6.jpg" alt="AI Work 6" loading="lazy" /> -->
-          <div class="card-ph">06</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 7">
-          <!-- <img src="images/ai/7.jpg" alt="AI Work 7" loading="lazy" /> -->
-          <div class="card-ph">07</div>
-        </div>
-
-        <div class="fan-card" role="button" tabindex="0" aria-label="AI image 8">
-          <!-- <img src="images/ai/8.jpg" alt="AI Work 8" loading="lazy" /> -->
-          <div class="card-ph">08</div>
-        </div>
-
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 1">
+        <!-- <img src="images/ai/1.jpg" alt="AI Work 1" loading="lazy" /> -->
+        <div class="grid-placeholder">01</div>
       </div>
-    </div>
 
-    <!-- Prev / Next controls -->
-    <div class="fan-controls">
-      <button class="fan-btn" id="fanPrev" aria-label="Previous image" disabled>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <span class="fan-hint">drag · click to open</span>
-      <button class="fan-btn" id="fanNext" aria-label="Next image">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 2">
+        <!-- <img src="images/ai/2.jpg" alt="AI Work 2" loading="lazy" /> -->
+        <div class="grid-placeholder">02</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 3">
+        <!-- <img src="images/ai/3.jpg" alt="AI Work 3" loading="lazy" /> -->
+        <div class="grid-placeholder">03</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 4">
+        <!-- <img src="images/ai/4.jpg" alt="AI Work 4" loading="lazy" /> -->
+        <div class="grid-placeholder">04</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 5">
+        <!-- <img src="images/ai/5.jpg" alt="AI Work 5" loading="lazy" /> -->
+        <div class="grid-placeholder">05</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 6">
+        <!-- <img src="images/ai/6.jpg" alt="AI Work 6" loading="lazy" /> -->
+        <div class="grid-placeholder">06</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 7">
+        <!-- <img src="images/ai/7.jpg" alt="AI Work 7" loading="lazy" /> -->
+        <div class="grid-placeholder">07</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 8">
+        <!-- <img src="images/ai/8.jpg" alt="AI Work 8" loading="lazy" /> -->
+        <div class="grid-placeholder">08</div>
+      </div>
+
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 9">
+        <!-- <img src="images/ai/9.jpg" alt="AI Work 9" loading="lazy" /> -->
+        <div class="grid-placeholder">09</div>
+      </div>
+
     </div>
   </section>
 
@@ -398,10 +338,7 @@
   </nav>
 
   <script>
-  /* ════════════════════════════════════════════
-     Floating nav toggle
-  ════════════════════════════════════════════ */
-  (function () {
+    /* ── Floating nav ── */
     const body   = document.body;
     const toggle = document.querySelector('.toggle');
     toggle.addEventListener('click', () => {
@@ -410,207 +347,41 @@
       toggle.setAttribute('aria-expanded', String(!exp));
       toggle.setAttribute('aria-label', exp ? 'Open menu' : 'Close menu');
     });
-  })();
 
-  /* ════════════════════════════════════════════
-     Lightbox
-  ════════════════════════════════════════════ */
-  const lb      = document.getElementById('lightbox');
-  const lbImg   = document.getElementById('lbImg');
-  const lbClose = document.getElementById('lbClose');
+    /* ── Lightbox ── */
+    const lb      = document.getElementById('lightbox');
+    const lbImg   = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
 
-  function openLightbox(src, alt) {
-    lbImg.src = src;
-    lbImg.alt = alt || '';
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(() => { lbImg.src = ''; }, 320);
-  }
-
-  lbClose.addEventListener('click', closeLightbox);
-  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
-  });
-
-  /* ════════════════════════════════════════════
-     Interactive Fan Carousel
-  ════════════════════════════════════════════ */
-  (function () {
-    const stage    = document.getElementById('fanStage');
-    const cards    = [...stage.querySelectorAll('.fan-card')];
-    const btnPrev  = document.getElementById('fanPrev');
-    const btnNext  = document.getElementById('fanNext');
-    const N        = cards.length;
-
-    /* ── Layout params (recomputed on resize) ── */
-    let STRIDE, START_X, CARD_W;
-
-    function initLayout() {
-      const W      = stage.offsetWidth;
-      const mobile = window.innerWidth <= 600;
-      CARD_W  = mobile ? 130 : 200;
-      // spread cards across ~88% of the stage width
-      STRIDE  = Math.max(CARD_W * 0.82, (W * 0.88) / (N - 1));
-      const totalSpread = (N - 1) * STRIDE;
-      START_X = Math.max(16, (W - CARD_W - totalSpread) / 2);
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { lbImg.src = ''; }, 320);
     }
 
-    /* ── Current state ── */
-    let offset       = 0;   // float – current rendered position
-    let targetOffset = 0;   // float – where we're snapping to
-    let rafId        = null;
-    let hoveredIdx   = -1;
-
-    /* ── Apply transform to one card ── */
-    function setCard(card, i, currentOffset) {
-      const rel = i - currentOffset;            // 0 = front/hero card
-      const t   = Math.max(0, rel) / (N - 1);  // 0‒1 for angle/depth calc
-
-      const x  = START_X + rel * STRIDE;
-      const ry = t * 65;                         // rotateY: 0° (front) → 65° (back)
-      const tz = -(t * 80);                      // translateZ: 0 → -80 px
-
-      /* hover lift only when not dragging and card is visible */
-      const lift = (!isDragging && i === hoveredIdx && rel > -0.5) ? ' translateY(-22px) scale(1.08)' : '';
-
-      card.style.transform     = `translateX(${x}px) translateZ(${tz}px) rotateY(${ry}deg)${lift}`;
-      card.style.opacity       = rel < 0 ? Math.max(0, 1 + rel * 3).toFixed(3) : '1';
-      card.style.zIndex        = String(Math.round(N - Math.max(0, rel)));
-      card.style.pointerEvents = rel >= -0.8 ? 'auto' : 'none';
-      card.style.boxShadow     = (i === Math.round(currentOffset) && !isDragging)
-        ? '0 28px 70px rgba(0,0,0,.24), 0 6px 16px rgba(0,0,0,.12)'
-        : '0 22px 55px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.10)';
-
-      /* mark the hero card so CSS can style it */
-      card.classList.toggle('is-front', Math.abs(rel) < 0.5);
-    }
-
-    function render(currentOffset) {
-      cards.forEach((card, i) => setCard(card, i, currentOffset));
-    }
-
-    /* ── Smooth lerp animation ── */
-    function animateTo(target) {
-      targetOffset = Math.max(0, Math.min(N - 1, target));
-      if (rafId) cancelAnimationFrame(rafId);
-      function step() {
-        offset += (targetOffset - offset) * 0.13;
-        render(offset);
-        rafId = Math.abs(targetOffset - offset) > 0.001
-          ? requestAnimationFrame(step)
-          : (render(offset = targetOffset), null);
-      }
-      rafId = requestAnimationFrame(step);
-      updateButtons();
-    }
-
-    /* ── Prev / Next buttons ── */
-    function updateButtons() {
-      const idx = Math.round(targetOffset);
-      btnPrev.disabled = idx <= 0;
-      btnNext.disabled = idx >= N - 1;
-    }
-
-    btnPrev.addEventListener('click', () => animateTo(Math.round(targetOffset) - 1));
-    btnNext.addEventListener('click', () => animateTo(Math.round(targetOffset) + 1));
-
-    /* ── Keyboard navigation ── */
-    stage.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); animateTo(Math.round(targetOffset) - 1); }
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  { e.preventDefault(); animateTo(Math.round(targetOffset) + 1); }
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
     });
 
-    /* ── Drag / Pointer ── */
-    let dragStartX      = null;
-    let dragStartOffset = 0;
-    let totalDragPx     = 0;
-    let isDragging      = false;
-
-    stage.addEventListener('pointerdown', e => {
-      if (rafId) cancelAnimationFrame(rafId);
-      dragStartX      = e.clientX;
-      dragStartOffset = offset;
-      totalDragPx     = 0;
-      isDragging      = false;
-      stage.setPointerCapture(e.pointerId);
-      stage.classList.add('dragging');
-    });
-
-    stage.addEventListener('pointermove', e => {
-      if (dragStartX === null) return;
-      const delta = e.clientX - dragStartX;
-      totalDragPx = Math.abs(delta);
-      if (totalDragPx > 6) {
-        isDragging = true;
-        const raw = dragStartOffset - delta / STRIDE;
-        offset = Math.max(-0.3, Math.min(N - 0.7, raw));
-        render(offset);
-      }
-    });
-
-    stage.addEventListener('pointerup', () => {
-      dragStartX = null;
-      stage.classList.remove('dragging');
-      if (isDragging) {
-        animateTo(Math.round(offset));
-      }
-      isDragging = false;
-    });
-
-    stage.addEventListener('pointercancel', () => {
-      dragStartX = null;
-      isDragging = false;
-      stage.classList.remove('dragging');
-      animateTo(Math.round(offset));
-    });
-
-    /* ── Hover lift ── */
-    cards.forEach((card, i) => {
-      card.addEventListener('mouseenter', () => { hoveredIdx = i; render(offset); });
-      card.addEventListener('mouseleave', () => { hoveredIdx = -1; render(offset); });
-    });
-
-    /* ── Click:
-         • non-front card → bring it to front
-         • front card     → open lightbox                                ── */
-    cards.forEach((card, i) => {
-      card.addEventListener('click', () => {
-        if (totalDragPx > 8) return;                   // was a drag, ignore
-        const frontIdx = Math.round(offset);
-        if (i !== frontIdx) {
-          animateTo(i);                                 // snap clicked card to front
-        } else {
-          const img = card.querySelector('img');
-          if (img) openLightbox(img.src, img.alt);     // open lightbox for front card
-        }
-      });
-
-      /* keyboard activate for each card */
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const frontIdx = Math.round(offset);
-          if (i !== frontIdx) { animateTo(i); }
-          else {
-            const img = card.querySelector('img');
-            if (img) openLightbox(img.src, img.alt);
-          }
-        }
+    /* ── Grid click → lightbox ── */
+    document.querySelectorAll('.grid-item').forEach(item => {
+      const open = () => {
+        const img = item.querySelector('img');
+        if (img) openLightbox(img.src, img.alt);
+      };
+      item.addEventListener('click', open);
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       });
     });
-
-    /* ── Init ── */
-    initLayout();
-    render(0);
-    updateButtons();
-
-    window.addEventListener('resize', () => { initLayout(); render(offset); });
-  })();
   </script>
 </body>
 </html>
