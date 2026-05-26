@@ -23,8 +23,8 @@
       --mint: #cfe9d2;
       --mint-strong: #b9dfbe;
       --sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      --pad: clamp(20px, 4vw, 40px);
-      --maxw: 1100px;
+      --pad-x: clamp(32px, 4vw, 64px);
+      --header-h: clamp(68px, 7vw, 88px);
     }
 
     body {
@@ -37,153 +37,145 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ---------- Fixed header ---------- */
     .site-header {
-      padding: clamp(28px, 4vw, 44px) var(--pad);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
       display: flex;
-      justify-content: center;
+      align-items: center;
+      padding: 0 var(--pad-x);
+      z-index: 50;
+      pointer-events: none;
     }
+    .site-header a { pointer-events: all; }
     .wordmark {
       font-weight: 400;
-      font-size: clamp(20px, 2.4vw, 28px);
+      font-size: clamp(18px, 2vw, 24px);
       letter-spacing: 0.32em;
       text-transform: uppercase;
       display: flex;
-      gap: clamp(24px, 4vw, 48px);
+      gap: clamp(20px, 3vw, 40px);
       margin: 0;
+      color: var(--ink);
     }
 
-    .hero {
-      width: 100%;
-      max-height: 600px;
+    /* ---------- Stacking panels ---------- */
+    .panels {
+      position: relative;
+    }
+
+    .panel {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 44fr 56fr;
       overflow: hidden;
-      background: #f5f4f1;
     }
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+
+    .panel:nth-child(1) { z-index: 1; }
+    .panel:nth-child(2) { z-index: 2; }
+    .panel:nth-child(3) { z-index: 3; }
+    .panel:nth-child(4) { z-index: 4; }
+
+    /* ---------- Left column ---------- */
+    .panel-left {
+      background: #f5f0ea;
+      padding: var(--pad-x);
+      padding-top: calc(var(--header-h) + clamp(32px, 4vw, 56px));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(20px, 2.5vw, 32px);
     }
-    .hero-placeholder {
-      width: 100%;
-      height: 480px;
-      background: #f5f4f1;
+
+    .panel-counter {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .panel-title {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    .panel-body p {
+      font-size: clamp(14px, 1.3vw, 16px);
+      line-height: 1.85;
+      color: var(--muted);
+      margin: 0 0 14px;
+      max-width: 400px;
+    }
+    .panel-body p:last-of-type { margin-bottom: 0; }
+
+    .panel-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .panel-tag {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid #c8c2ba;
+      border-radius: 999px;
+      padding: 5px 14px;
+    }
+
+    /* ---------- Right column ---------- */
+    .panel-right {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #b0a898;
-      font-size: 12px;
+    }
+
+    .panel:nth-child(1) .panel-right { background: #1e1c1a; }
+    .panel:nth-child(2) .panel-right { background: #192118; }
+    .panel:nth-child(3) .panel-right { background: #191c28; }
+    .panel:nth-child(4) .panel-right { background: #201b16; }
+
+    .panel-right img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .panel-right-placeholder {
+      color: rgba(255,255,255,.12);
+      font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
     }
 
-    .content {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: clamp(40px, 6vw, 80px) var(--pad) clamp(120px, 14vh, 180px);
+    /* ---------- Footer ---------- */
+    .footer-section {
+      background: var(--bg);
+      padding: clamp(40px, 6vw, 80px) var(--pad-x);
+      position: relative;
+      z-index: 10;
     }
-
-    .meta {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: clamp(40px, 6vw, 64px);
-      padding-bottom: clamp(32px, 4vw, 48px);
-      border-bottom: 1px solid var(--rule);
-    }
-    .meta-label {
-      font-size: 11px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0;
-    }
-    .meta h1 {
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      margin: 0;
-      line-height: 1.1;
-    }
-    .meta-tags {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin: 8px 0 0;
-    }
-
-    .intro {
-      max-width: 660px;
-      font-size: clamp(16px, 1.5vw, 19px);
-      line-height: 1.7;
-      margin-bottom: clamp(48px, 7vw, 80px);
-    }
-    .intro p { margin: 0 0 1em; }
-    .intro p:last-child { margin: 0; }
-
-    .section {
-      margin-bottom: clamp(48px, 7vw, 80px);
-    }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 16px;
-    }
-
-    .img-full {
-      width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .img-full img { width: 100%; height: auto; display: block; }
-
-    .img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(8px, 1vw, 16px);
-    }
-    .img-pair img { width: 100%; height: auto; border-radius: 6px; display: block; }
-
-    .img-trio {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(8px, 1vw, 16px);
-    }
-    .img-trio img { width: 100%; height: auto; border-radius: 6px; display: block; }
-
-    .img-media {
-      width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #f5f4f1;
-    }
-    .img-media img { width: 100%; height: auto; display: block; }
-
-    .img-placeholder {
-      width: 100%;
-      background: #f0ede8;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #b0a898;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-    .img-placeholder.tall { height: 520px; }
-    .img-placeholder.medium { height: 380px; }
-    .img-placeholder.short { height: 260px; }
-
     .project-nav {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-top: clamp(32px, 4vw, 48px);
       border-top: 1px solid var(--rule);
-      margin-top: clamp(48px, 7vw, 80px);
     }
     .project-nav a {
       font-size: 12px;
@@ -194,12 +186,13 @@
     }
     .project-nav a:hover { color: var(--ink); }
 
+    /* ---------- Floating nav ---------- */
     .floating-nav {
       position: fixed;
       bottom: clamp(20px, 3vh, 32px);
       left: 50%;
       transform: translateX(-50%);
-      z-index: 30;
+      z-index: 100;
       display: flex;
       align-items: center;
       gap: clamp(10px, 1.4vw, 18px);
@@ -230,7 +223,7 @@
       justify-content: center;
       transition: background .25s ease, transform .25s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
       flex-shrink: 0;
-      box-shadow: 0 6px 20px rgba(143, 199, 154, .35);
+      box-shadow: 0 6px 20px rgba(143,199,154,.35);
     }
     .toggle:hover { background: var(--mint-strong); transform: rotate(90deg); }
     .toggle svg { width: 18px; height: 18px; stroke: #1d1d1d; stroke-width: 1.5; fill: none; }
@@ -253,14 +246,28 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
-    @media (max-width: 640px) {
-      .img-pair, .img-trio { grid-template-columns: 1fr; }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 768px) {
+      .panel {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55fr 45fr;
+        height: 100vh;
+      }
+      .panel-left {
+        padding-top: calc(var(--header-h) + 24px);
+        justify-content: flex-start;
+      }
+      .panel-right { min-height: 0; }
+    }
+    @media (max-width: 540px) {
       .wordmark { letter-spacing: 0.24em; gap: 18px; }
     }
   </style>
 </head>
 <body data-nav="collapsed">
 
+  <!-- Fixed wordmark -->
   <header class="site-header">
     <a href="index.html" aria-label="Home">
       <h1 class="wordmark">
@@ -270,82 +277,104 @@
     </a>
   </header>
 
-  <!-- Hero — replace placeholder with: <img src="images/marketing/hero.png" alt="Marketing hero visual" /> -->
-  <div class="hero">
-    <div class="hero-placeholder">Add hero image</div>
+  <!-- Stacking scroll panels -->
+  <div class="panels">
+
+    <!-- 01 Strategy -->
+    <div class="panel">
+      <div class="panel-left">
+        <span class="panel-counter">01 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
+        <h2 class="panel-title">Strategy</h2>
+        <div class="panel-body">
+          <p>Every campaign begins with clarity. I worked with founders and marketing leads to define the audience, sharpen the message, and map out a go-to-market approach grounded in real user behaviours and business goals.</p>
+          <p>From brand audits and competitor research to messaging frameworks, I built the strategic foundation that made every downstream asset smarter and more effective.</p>
+          <div class="panel-tags">
+            <span class="panel-tag">Research</span>
+            <span class="panel-tag">Brand Positioning</span>
+            <span class="panel-tag">Go-to-Market</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-right">
+        <!-- <img src="images/marketing/strategy.png" alt="Strategy" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
+      </div>
+    </div>
+
+    <!-- 02 Campaigns -->
+    <div class="panel">
+      <div class="panel-left">
+        <span class="panel-counter">02 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
+        <h2 class="panel-title">Campaigns</h2>
+        <div class="panel-body">
+          <p>I designed and executed end-to-end campaigns — from concept through to final delivery. Across email, paid media, and content programs, strategy and creative stayed tightly aligned so every touchpoint told a consistent story.</p>
+          <p>Each campaign was scoped, designed, and tracked against clear performance goals — with creative that adapted to the channel without losing brand cohesion.</p>
+          <div class="panel-tags">
+            <span class="panel-tag">Email</span>
+            <span class="panel-tag">Paid Media</span>
+            <span class="panel-tag">Content</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-right">
+        <!-- <img src="images/marketing/campaigns.png" alt="Campaigns" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
+      </div>
+    </div>
+
+    <!-- 03 Landing Pages -->
+    <div class="panel">
+      <div class="panel-left">
+        <span class="panel-counter">03 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
+        <h2 class="panel-title">Landing Pages</h2>
+        <div class="panel-body">
+          <p>I designed high-converting landing pages built around a single goal — clear hierarchy, purposeful copy placement, and layouts optimised for the traffic source driving the visit.</p>
+          <p>Each page was crafted to reduce friction and guide users toward a clear action, whether that was a sign-up, a booking, or a purchase.</p>
+          <div class="panel-tags">
+            <span class="panel-tag">UX</span>
+            <span class="panel-tag">Web Design</span>
+            <span class="panel-tag">Conversion</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-right">
+        <!-- <img src="images/marketing/landing.png" alt="Landing Pages" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
+      </div>
+    </div>
+
+    <!-- 04 Social Assets -->
+    <div class="panel">
+      <div class="panel-left">
+        <span class="panel-counter">04 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
+        <h2 class="panel-title">Social Assets</h2>
+        <div class="panel-body">
+          <p>I created scroll-stopping visual content adapted for each platform — from Instagram stories to LinkedIn carousels. Every asset was rooted in the broader campaign strategy and designed to build a recognisable visual identity over time.</p>
+          <p>Templates, systems, and repeatable formats meant the brand could scale content output without losing quality or consistency.</p>
+          <div class="panel-tags">
+            <span class="panel-tag">Instagram</span>
+            <span class="panel-tag">LinkedIn</span>
+            <span class="panel-tag">Templates</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-right">
+        <!-- <img src="images/marketing/social.png" alt="Social Assets" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
+      </div>
+    </div>
+
   </div>
 
-  <div class="content">
-
-    <div class="meta">
-      <p class="meta-label">04 / Case Study</p>
-      <h1>Marketing</h1>
-      <p class="meta-tags">Digital · Web Design · Campaigns</p>
-    </div>
-
-    <div class="intro">
-      <p>Add your project overview here — the brief, the challenge, and what made this project unique.</p>
-      <p>Describe the outcome and your role.</p>
-    </div>
-
-    <!-- Section 1 — Strategy -->
-    <div class="section">
-      <p class="section-label">Strategy</p>
-      <div class="img-full">
-        <!-- <img src="images/marketing/strategy.png" alt="Marketing strategy" loading="lazy" /> -->
-        <div class="img-placeholder tall">Strategy / overview</div>
-      </div>
-    </div>
-
-    <!-- Section 2 — Campaigns -->
-    <div class="section">
-      <p class="section-label">Campaigns</p>
-      <div class="img-pair">
-        <!-- <img src="images/marketing/campaign-1.png" alt="Campaign" loading="lazy" />
-             <img src="images/marketing/campaign-2.png" alt="Campaign" loading="lazy" /> -->
-        <div class="img-placeholder medium">Campaign 1</div>
-        <div class="img-placeholder medium">Campaign 2</div>
-      </div>
-    </div>
-
-    <!-- Section 3 — Landing Pages -->
-    <div class="section">
-      <p class="section-label">Landing Pages</p>
-      <div class="img-full">
-        <!-- <img src="images/marketing/landing.png" alt="Landing page design" loading="lazy" /> -->
-        <div class="img-placeholder medium">Landing page design</div>
-      </div>
-    </div>
-
-    <!-- Section 4 — Social / Assets -->
-    <div class="section">
-      <p class="section-label">Social Assets</p>
-      <div class="img-trio">
-        <!-- <img src="images/marketing/social-1.png" alt="Social asset" loading="lazy" />
-             <img src="images/marketing/social-2.png" alt="Social asset" loading="lazy" />
-             <img src="images/marketing/social-3.png" alt="Social asset" loading="lazy" /> -->
-        <div class="img-placeholder short">Social 1</div>
-        <div class="img-placeholder short">Social 2</div>
-        <div class="img-placeholder short">Social 3</div>
-      </div>
-    </div>
-
-    <!-- Section 5 — Results / Motion -->
-    <div class="section">
-      <p class="section-label">Results</p>
-      <div class="img-media">
-        <!-- <img src="images/marketing/results.png" alt="Marketing results" loading="lazy" /> -->
-        <div class="img-placeholder tall">Results / motion</div>
-      </div>
-    </div>
-
+  <!-- Project nav footer -->
+  <div class="footer-section">
     <div class="project-nav">
       <a href="toku.html">← Toku</a>
       <a href="experential.html">Experential →</a>
     </div>
-
   </div>
 
+  <!-- Floating bottom nav -->
   <nav class="floating-nav" aria-label="Sections">
     <a class="pill" href="index.html">Home</a>
     <a class="pill" href="projects.html">Projects</a>
