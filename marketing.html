@@ -7,7 +7,7 @@
   <meta name="description" content="Marketing — Digital & Web Design by Kathia Anaid" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -85,11 +85,11 @@
     .panel-left {
       background: #f5f0ea;
       padding: var(--pad-x);
-      padding-top: calc(var(--header-h) + clamp(32px, 4vw, 56px));
+      padding-top: calc(var(--header-h) + clamp(24px, 3vw, 40px));
+      padding-bottom: clamp(40px, 5vw, 72px);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: clamp(20px, 2.5vw, 32px);
+      justify-content: space-between;
     }
 
     .panel-counter {
@@ -99,37 +99,14 @@
       color: var(--muted);
     }
 
-    .panel-title {
-      font-size: clamp(36px, 4.5vw, 64px);
-      font-weight: 400;
-      letter-spacing: 0.03em;
+    .panel-display {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(44px, 5.8vw, 80px);
+      font-weight: 300;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
       margin: 0;
-      line-height: 1.05;
-    }
-
-    .panel-body p {
-      font-size: clamp(14px, 1.3vw, 16px);
-      line-height: 1.85;
-      color: var(--muted);
-      margin: 0 0 14px;
-      max-width: 400px;
-    }
-    .panel-body p:last-of-type { margin-bottom: 0; }
-
-    .panel-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-    .panel-tag {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
       color: var(--ink);
-      border: 1px solid #c8c2ba;
-      border-radius: 999px;
-      padding: 5px 14px;
     }
 
     /* ---------- Right column ---------- */
@@ -283,17 +260,8 @@
     <!-- 01 Strategy -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter">01 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
-        <h2 class="panel-title">Strategy</h2>
-        <div class="panel-body">
-          <p>Every campaign begins with clarity. I worked with founders and marketing leads to define the audience, sharpen the message, and map out a go-to-market approach grounded in real user behaviours and business goals.</p>
-          <p>From brand audits and competitor research to messaging frameworks, I built the strategic foundation that made every downstream asset smarter and more effective.</p>
-          <div class="panel-tags">
-            <span class="panel-tag">Research</span>
-            <span class="panel-tag">Brand Positioning</span>
-            <span class="panel-tag">Go-to-Market</span>
-          </div>
-        </div>
+        <span class="panel-counter">01 / 04 &nbsp;&mdash;&nbsp; Strategy</span>
+        <p class="panel-display">Good work starts before the first brief is written.</p>
       </div>
       <div class="panel-right">
         <!-- <img src="images/marketing/strategy.png" alt="Strategy" loading="lazy" /> -->
@@ -304,17 +272,8 @@
     <!-- 02 Campaigns -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter">02 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
-        <h2 class="panel-title">Campaigns</h2>
-        <div class="panel-body">
-          <p>I designed and executed end-to-end campaigns — from concept through to final delivery. Across email, paid media, and content programs, strategy and creative stayed tightly aligned so every touchpoint told a consistent story.</p>
-          <p>Each campaign was scoped, designed, and tracked against clear performance goals — with creative that adapted to the channel without losing brand cohesion.</p>
-          <div class="panel-tags">
-            <span class="panel-tag">Email</span>
-            <span class="panel-tag">Paid Media</span>
-            <span class="panel-tag">Content</span>
-          </div>
-        </div>
+        <span class="panel-counter">02 / 04 &nbsp;&mdash;&nbsp; Campaigns</span>
+        <p class="panel-display">Every touchpoint is a chance to say something worth remembering.</p>
       </div>
       <div class="panel-right">
         <!-- <img src="images/marketing/campaigns.png" alt="Campaigns" loading="lazy" /> -->
@@ -325,17 +284,8 @@
     <!-- 03 Landing Pages -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter">03 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
-        <h2 class="panel-title">Landing Pages</h2>
-        <div class="panel-body">
-          <p>I designed high-converting landing pages built around a single goal — clear hierarchy, purposeful copy placement, and layouts optimised for the traffic source driving the visit.</p>
-          <p>Each page was crafted to reduce friction and guide users toward a clear action, whether that was a sign-up, a booking, or a purchase.</p>
-          <div class="panel-tags">
-            <span class="panel-tag">UX</span>
-            <span class="panel-tag">Web Design</span>
-            <span class="panel-tag">Conversion</span>
-          </div>
-        </div>
+        <span class="panel-counter">03 / 04 &nbsp;&mdash;&nbsp; Landing Pages</span>
+        <p class="panel-display">One page. One goal. Every element earning its place.</p>
       </div>
       <div class="panel-right">
         <!-- <img src="images/marketing/landing.png" alt="Landing Pages" loading="lazy" /> -->
@@ -346,17 +296,8 @@
     <!-- 04 Social Assets -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter">04 / 04 &nbsp;&mdash;&nbsp; Marketing</span>
-        <h2 class="panel-title">Social Assets</h2>
-        <div class="panel-body">
-          <p>I created scroll-stopping visual content adapted for each platform — from Instagram stories to LinkedIn carousels. Every asset was rooted in the broader campaign strategy and designed to build a recognisable visual identity over time.</p>
-          <p>Templates, systems, and repeatable formats meant the brand could scale content output without losing quality or consistency.</p>
-          <div class="panel-tags">
-            <span class="panel-tag">Instagram</span>
-            <span class="panel-tag">LinkedIn</span>
-            <span class="panel-tag">Templates</span>
-          </div>
-        </div>
+        <span class="panel-counter">04 / 04 &nbsp;&mdash;&nbsp; Social Assets</span>
+        <p class="panel-display">Built to stop the scroll and built to last beyond it.</p>
       </div>
       <div class="panel-right">
         <!-- <img src="images/marketing/social.png" alt="Social Assets" loading="lazy" /> -->
