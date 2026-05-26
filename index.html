@@ -74,12 +74,27 @@
     /* ---------- Rotating 3D carousel ---------- */
     .carousel {
       width: 100%;
+      position: relative;                          /* CHANGED: added for ring */
       display: flex;
       align-items: center;
       justify-content: center;
       perspective: 1400px;
       padding: clamp(20px, 4vw, 40px) 0;
       user-select: none;
+    }
+
+    /* ADDED: subtle circular track ring */
+    .carousel::before {
+      content: '';
+      position: absolute;
+      width: 580px;
+      height: 580px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scaleY(0.18);
+      pointer-events: none;
     }
 
     .stage {
@@ -100,20 +115,20 @@
     }
 
     .slide {
-  position: absolute;
-  inset: 0;
-  width: 165px;
-  height: 210px;
-  border-radius: 10px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
-  backface-visibility: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
-}
+      position: absolute;
+      inset: 0;
+      width: 165px;
+      height: 210px;
+      border-radius: 10px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+      backface-visibility: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+    }
     .slide::after {
       content: attr(data-label);
       position: absolute;
@@ -130,34 +145,35 @@
     .slide:hover::after, .slide:focus-visible::after { opacity: 1; }
     .slide:focus-visible { outline: 2px solid var(--mint-strong); outline-offset: 4px; }
 
-/* 5 slides spaced 72° apart */
-.slide:nth-child(1) { 
-  transform: rotateY(0deg) translateZ(360px); 
-  background-image: url("images/lp/aicover.png");}
+    /* 5 slides spaced 72° apart — CHANGED: translateZ 360px → 280px */
+    .slide:nth-child(1) {
+      transform: rotateY(0deg) translateZ(280px);
+      background-image: url("images/lp/aicover.png"); }
 
-.slide:nth-child(2) { 
-  transform: rotateY(72deg) translateZ(360px); 
-  background-image: url("images/lp/mkcover.png");}
+    .slide:nth-child(2) {
+      transform: rotateY(72deg) translateZ(280px);
+      background-image: url("images/lp/mkcover.png"); }
 
-.slide:nth-child(3) { 
-  transform: rotateY(144deg) translateZ(360px); 
-  background-image: url("images/lp/pncover.png");}
+    .slide:nth-child(3) {
+      transform: rotateY(144deg) translateZ(280px);
+      background-image: url("images/lp/pncover.png"); }
 
-.slide:nth-child(4) { 
-  transform: rotateY(216deg) translateZ(360px); 
-  background-image: url("images/lp/pogocover.png");}
+    .slide:nth-child(4) {
+      transform: rotateY(216deg) translateZ(280px);
+      background-image: url("images/lp/pogocover.png"); }
 
-.slide:nth-child(5) { 
-  transform: rotateY(288deg) translateZ(360px); 
-  background-image: url("images/Firefly.png"); }
+    .slide:nth-child(5) {
+      transform: rotateY(288deg) translateZ(280px);
+      background-image: url("images/Firefly.png"); }
 
+    /* CHANGED: mobile translateZ 260px → 200px */
     @media (max-width: 600px) {
-  .slide:nth-child(1) { transform: rotateY(0deg) translateZ(260px); }
-  .slide:nth-child(2) { transform: rotateY(72deg) translateZ(260px); }
-  .slide:nth-child(3) { transform: rotateY(144deg) translateZ(260px); }
-  .slide:nth-child(4) { transform: rotateY(216deg) translateZ(260px); }
-  .slide:nth-child(5) { transform: rotateY(288deg) translateZ(260px); }
-}
+      .slide:nth-child(1) { transform: rotateY(0deg)   translateZ(200px); }
+      .slide:nth-child(2) { transform: rotateY(72deg)  translateZ(200px); }
+      .slide:nth-child(3) { transform: rotateY(144deg) translateZ(200px); }
+      .slide:nth-child(4) { transform: rotateY(216deg) translateZ(200px); }
+      .slide:nth-child(5) { transform: rotateY(288deg) translateZ(200px); }
+    }
 
     /* ---------- Bottom navigation ---------- */
     .nav {
@@ -198,11 +214,9 @@
     .toggle:hover { background: var(--mint-strong); transform: rotate(90deg); }
     .toggle svg { width: 18px; height: 18px; stroke: #1d1d1d; stroke-width: 1.5; fill: none; transition: transform .25s ease; }
 
-    /* expanded state — green stays the same size, pills fade in */
     body[data-nav="expanded"] .toggle { width: 44px; height: 44px; box-shadow: 0 4px 12px rgba(143,199,154,.3); }
     body[data-nav="expanded"] .toggle svg { width: 16px; height: 16px; }
 
-    /* hide pills when collapsed; smooth fade when expanded */
     .pill {
       opacity: 1;
       transform: translateY(0);
@@ -232,7 +246,7 @@
       text-align: center;
     }
 
-    /* ---------- Sections (panels that expand from About/Projects/etc.) ---------- */
+    /* ---------- Panels ---------- */
     .panel {
       display: none;
       position: relative;
@@ -295,8 +309,6 @@
     /* ---------- Mobile tightening ---------- */
     @media (max-width: 640px) {
       .wordmark { letter-spacing: 0.24em; gap: 18px; }
-      .projects { gap: 14px; }
-      .card { width: 38vw; }
       .pill { padding: 12px 18px; font-size: 11px; letter-spacing: 0.18em; }
     }
   </style>
@@ -311,11 +323,12 @@
 
     <div class="carousel" aria-label="Selected projects carousel">
       <div class="stage spinning" id="stage" role="region" aria-roledescription="carousel" aria-live="polite">
-<a class="slide" href="projects.html" data-label=""   ...></a>
-<a class="slide" href="projects.html" data-label="" ...></a>
-<a class="slide" href="projects.html" data-label="" ...></a>
-<a class="slide" href="projects.html" data-label=""   ...></a>
-<a class="slide" href="projects.html" data-label=“”   ...></a>
+        <!-- CHANGED: href links updated to individual case study pages -->
+        <a class="slide" href="projects.html"    data-label="AI Work"></a>
+        <a class="slide" href="marketing.html"   data-label="Marketing"></a>
+        <a class="slide" href="pique-nique.html" data-label="Pique Nique"></a>
+        <a class="slide" href="pogo.html"        data-label="POGO"></a>
+        <a class="slide" href="toku.html"        data-label="Toku"></a>
       </div>
     </div>
 
@@ -350,10 +363,7 @@
     </nav>
   </main>
 
- 
-
   <script>
-    // ---------- Bottom nav toggle (+ / x) ----------
     const body = document.body;
     const toggle = document.querySelector('.toggle');
     toggle.addEventListener('click', () => {
@@ -363,7 +373,6 @@
       toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
     });
 
-    // ---------- Inline panel switching ----------
     const panels = document.querySelectorAll('.panel');
     document.querySelectorAll('.pill[data-target]').forEach(pill => {
       pill.addEventListener('click', (e) => {
@@ -378,7 +387,6 @@
       });
     });
 
-    // close-button on each panel
     document.querySelectorAll('.panel-close').forEach(btn => {
       btn.addEventListener('click', () => {
         const panel = btn.closest('.panel');
@@ -386,10 +394,7 @@
       });
     });
 
-    // ---------- Rotating carousel ----------
     const stage = document.getElementById('stage');
-
-    // pause auto-spin on hover, resume on leave
     stage.addEventListener('mouseenter', () => { stage.style.animationPlayState = 'paused'; });
     stage.addEventListener('mouseleave', () => { stage.style.animationPlayState = 'running'; });
   </script>
