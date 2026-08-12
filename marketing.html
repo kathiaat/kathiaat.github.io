@@ -7,7 +7,7 @@
   <meta name="description" content="Marketing — Digital & Web Design by Kathia Anaid" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital@0;1&family=Host+Grotesk:wght@500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -22,7 +22,7 @@
       --rule: #ededed;
       --mint: #cfe9d2;
       --mint-strong: #b9dfbe;
-      --sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --sans: "Libertinus Serif", "Times New Roman", Georgia, serif;
       --pad-x: clamp(32px, 4vw, 64px);
       --header-h: clamp(68px, 7vw, 88px);
     }
@@ -31,7 +31,7 @@
       background: var(--bg);
       color: var(--ink);
       font-family: var(--sans);
-      font-weight: 300;
+      font-weight: 400;
       font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -52,7 +52,7 @@
     }
     .site-header a { pointer-events: all; }
     .wordmark {
-      font-weight: 800;
+      font-weight: 400;
       font-size: clamp(18px, 2vw, 24px);
       letter-spacing: 0.32em;
       text-transform: uppercase;
@@ -94,15 +94,16 @@
 
     .panel-counter {
       font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
     .panel-display {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(28px, 2.5vw, 42px);
-      font-weight: 700;
+      font-family: "Libertinus Serif", Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 50px);
+      font-weight: 400;
       line-height: 1.12;
       letter-spacing: -0.01em;
       margin: 0;
@@ -241,6 +242,7 @@
       .wordmark { letter-spacing: 0.24em; gap: 18px; }
     }
   </style>
+  <link rel="stylesheet" href="redesign.css" />
 </head>
 <body data-nav="collapsed">
 
@@ -260,48 +262,48 @@
     <!-- 01 Strategy -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter"><b>Strategy</b></span>
+        <span class="panel-counter">01 / 04 &nbsp;&mdash;&nbsp; Strategy</span>
         <p class="panel-display">Good work starts before the first brief is written.</p>
       </div>
       <div class="panel-right">
-        <img src="images/mktg/mkst.png" alt="Strategy" loading="lazy" />
-       
+        <!-- <img src="images/marketing/strategy.png" alt="Strategy" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
       </div>
     </div>
 
     <!-- 02 Campaigns -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter"><b>Campaigns</b></span>
+        <span class="panel-counter">02 / 04 &nbsp;&mdash;&nbsp; Campaigns</span>
         <p class="panel-display">Every touchpoint is a chance to say something worth remembering.</p>
       </div>
       <div class="panel-right">
-       <img src="images/mktg/mkca.png" alt="Campaigns" loading="lazy" />
-       
+        <!-- <img src="images/marketing/campaigns.png" alt="Campaigns" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
       </div>
     </div>
 
     <!-- 03 Landing Pages -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter"><b>Landing Pages</b></span>
+        <span class="panel-counter">03 / 04 &nbsp;&mdash;&nbsp; Landing Pages</span>
         <p class="panel-display">One page. One goal. Every element earning its place.</p>
       </div>
       <div class="panel-right">
-    <img src="images/mktg/mklp.png" alt="Landing Pages" loading="lazy" />
-     
+        <!-- <img src="images/marketing/landing.png" alt="Landing Pages" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
       </div>
     </div>
 
     <!-- 04 Social Assets -->
     <div class="panel">
       <div class="panel-left">
-        <span class="panel-counter"><b>Social Assets</b></span>
+        <span class="panel-counter">04 / 04 &nbsp;&mdash;&nbsp; Social Assets</span>
         <p class="panel-display">Built to stop the scroll and built to last beyond it.</p>
       </div>
       <div class="panel-right">
-       <img src="images/mktg/mksa.png" alt="Social Assets" loading="lazy" />
-        <span class="panel-right-placeholder"></span>
+        <!-- <img src="images/marketing/social.png" alt="Social Assets" loading="lazy" /> -->
+        <span class="panel-right-placeholder">Image</span>
       </div>
     </div>
 
@@ -318,7 +320,7 @@
   <!-- Floating bottom nav -->
   <nav class="floating-nav" aria-label="Sections">
     <a class="pill" href="index.html">Home</a>
-    <a class="pill" href="projects.html">Projects</a>
+    <a class="pill" href="index.html">Projects</a>
     <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
       <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
       <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>

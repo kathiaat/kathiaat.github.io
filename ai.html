@@ -7,7 +7,7 @@
   <meta name="description" content="AI Work — Kathia Anaid" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital@0;1&family=Host+Grotesk:wght@500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -22,7 +22,7 @@
       --rule: #ededed;
       --mint: #cfe9d2;
       --mint-strong: #b9dfbe;
-      --sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --sans: "Libertinus Serif", "Times New Roman", Georgia, serif;
       --pad: clamp(20px, 4vw, 40px);
       --maxw: 1100px;
     }
@@ -31,7 +31,7 @@
       background: var(--bg);
       color: var(--ink);
       font-family: var(--sans);
-      font-weight: 300;
+      font-weight: 400;
       font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -233,6 +233,7 @@
       .img-grid { grid-template-columns: 1fr; gap: 12px; }
     }
   </style>
+  <link rel="stylesheet" href="redesign.css" />
 </head>
 <body data-nav="collapsed">
 
@@ -249,8 +250,8 @@
       <p class="meta-tags">AI Design · Generative · UX/UI</p>
     </div>
     <div class="intro">
-      <p>A selection of personal work crafted with the help of Artificial Intelligence.</p>
-    
+      <p>Add your AI project overview here — the brief, the challenge, and what made this work unique.</p>
+      <p>Describe your process and the outcome.</p>
     </div>
   </div>
 
@@ -262,49 +263,49 @@
   <section class="grid-section" aria-label="AI Work Gallery">
     <div class="img-grid">
 
-      <div class="grid-item" tabindex="0" role="button" aria-label="">
-     <img src="images/aics/brioni.png" alt="AI Work 1" loading="lazy" />
-    
+      <div class="grid-item" tabindex="0" role="button" aria-label="AI image 1">
+        <!-- <img src="images/ai/1.jpg" alt="AI Work 1" loading="lazy" /> -->
+        <div class="grid-placeholder">01</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 2">
-      <img src="images/aics/costes.png" alt="AI Work 2" loading="lazy" />
-        
+        <!-- <img src="images/ai/2.jpg" alt="AI Work 2" loading="lazy" /> -->
+        <div class="grid-placeholder">02</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 3">
-      <img src="images/aics/looen.png" alt="AI Work 3" loading="lazy" />
+        <!-- <img src="images/ai/3.jpg" alt="AI Work 3" loading="lazy" /> -->
         <div class="grid-placeholder">03</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 4">
-     <img src="images/aics/looen1.png" alt="AI Work 4" loading="lazy" />
-       
+        <!-- <img src="images/ai/4.jpg" alt="AI Work 4" loading="lazy" /> -->
+        <div class="grid-placeholder">04</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 5">
-      <img src="images/aics/souer.png" alt="AI Work 5" loading="lazy" />
-       
+        <!-- <img src="images/ai/5.jpg" alt="AI Work 5" loading="lazy" /> -->
+        <div class="grid-placeholder">05</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 6">
-    <img src="images/aics/souerr.png" alt="AI Work 6" loading="lazy" />
-       
+        <!-- <img src="images/ai/6.jpg" alt="AI Work 6" loading="lazy" /> -->
+        <div class="grid-placeholder">06</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 7">
-    <img src="images/aics/z7v.png" alt="AI Work 7" loading="lazy" />
-      
+        <!-- <img src="images/ai/7.jpg" alt="AI Work 7" loading="lazy" /> -->
+        <div class="grid-placeholder">07</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 8">
-      <img src="images/ai/8.jpg" alt="AI Work 8" loading="lazy" />
-  
+        <!-- <img src="images/ai/8.jpg" alt="AI Work 8" loading="lazy" /> -->
+        <div class="grid-placeholder">08</div>
       </div>
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 9">
-      <img src="images/ai/9.jpg" alt="AI Work 9" loading="lazy" />
-       
+        <!-- <img src="images/ai/9.jpg" alt="AI Work 9" loading="lazy" /> -->
+        <div class="grid-placeholder">09</div>
       </div>
 
     </div>
@@ -322,13 +323,13 @@
   </div>
 
   <div class="project-nav">
-    <a href="projects.html">← All Work</a>
+    <a href="index.html">← All Work</a>
     <a href="toku.html">Toku →</a>
   </div>
 
   <nav class="floating-nav" aria-label="Sections">
     <a class="pill" href="index.html">Home</a>
-    <a class="pill" href="projects.html">Projects</a>
+    <a class="pill" href="index.html">Projects</a>
     <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
       <svg class="x"    viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
       <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
