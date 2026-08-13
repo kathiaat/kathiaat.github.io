@@ -61,3 +61,19 @@ h1, h2, h3, h4, h5, h6 {
 .panel-close:hover { background: #f2f2f0 !important; }
 
 ::selection { background: #e9e9e6 !important; color: #111 !important; }
+
+/* Case pages: hide the old floating pill menu entirely */
+.floating-nav { display: none !important; }
+
+/* Case pages: fixed HOME link, top-left */
+.home-link {
+  position: fixed;
+  top: clamp(28px, 4vw, 44px);
+  left: clamp(20px, 5vw, 60px);
+  z-index: 200;
+  font-family: var(--serif) !important;
+  font-size: clamp(15px, 1.15vw, 22px);
+  letter-spacing: 0.08em;
+  color: #111;
+}
+.home-link:hover { font-style: italic; }
