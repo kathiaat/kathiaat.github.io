@@ -175,7 +175,7 @@
     .list-head, .row {
       display: grid;
       grid-template-columns: 12.3% 22.7% 20.6% 1fr;
-      align-items: baseline;
+      align-items: center;
     }
     .list-head span {
       font-family: var(--helv);
@@ -447,22 +447,22 @@
     // Each project lists 3 images (Korres has 1) — arrows appear in the
     // popup when there is more than one.
     const projects = [
-      { year: "2026", title: "Pique Nique",        role: "Creative Direction - Product", scope: "Led brand identity and product development for an underwear label.",
-        images: ["images/pncover.png", "PN/1-Header.png", "PN/2.Moodboard.png"], link: "pique-nique.html" },
-      { year: "2026", title: "Tagto",              role: "Product Designer",             scope: "Created a label-scanning tool that surfaces bite-sized product info to guide smarter purchases.",
-        images: [PH, PH, PH], link: null },
-      { year: "2026", title: "Korres",             role: "Designer/Drafter",             scope: "Designed and drafted a pop-up retail activation for the Korres × Myka collaboration.",
-        images: ["images/korrescover.png"], link: null }, // single image — no arrows
-      { year: "2026", title: "Marketing material", role: "Multi-format Designer",        scope: "Produced marketing content adapted across a range of formats and channels.",
-        images: ["images/mktgcover.png", "images/lp/mkcover.png", "images/Marketing.png"], link: "marketing.html" },
-      { year: "2026", title: "AI Series",          role: "Designer",                     scope: "Explored conceptual design through self-directed, AI-driven experimentation.",
-        images: ["images/aicover.png", "images/lp/aicover.png", "images/Firefly.png"], link: "ai.html" },
+      { year: "2026", title: "WIP",        role: "Creative Direction - Product", scope: "Work in progress",
+        images: ["images/wip.png", "PN/1-Header.png", "PN/2.Moodboard.png"], link: "pique-nique.html" },
+      { year: "2026", title: "Korres",              role: "Designer/Drafter",             scope: "Designed and drafted a pop-up retail activation for the Korres × Myka collaboration.",
+        images: ["images/korres.png"], link: "korres.html" },
+      { year: "2026", title: "Marketing",             role: "Designer/Drafter",             scope: "Produced marketing content adapted across a range of formats and channels.",
+        images: ["images/marketing.gif"], link: null }, // single image — no arrows
+      { year: "2026", title: "AI Series", role: "Multi-format Designer",        scope: "xplored conceptual design through self-directed, AI-driven experimentation.",
+        images: ["images/AI.png"], link: "marketing.html" },
+      { year: "2026", title: "Tagto",          role: "Product Designer",                     scope: "ECreated a label-scanning tool that surfaces bite-sized product info to guide smarter purchases.",
+        images: ["images/tagto.png"], link: "ai.html" },
       { year: "2025", title: "POGO",               role: "Creative Direction",           scope: "Set creative direction and built brand and marketing assets for a men's underwear label.",
-        images: ["images/pogocover.png", "POGOIMAGES/1pogo.jpeg", "POGOIMAGES/3pogo.jpeg"], link: "pogo.html" },
+        images: ["images/pogo.png", "POGOIMAGES/1pogo.jpeg", "POGOIMAGES/3pogo.jpeg"], link: "pogo.html" },
       { year: "2025", title: "Food Panda",         role: "UX/UI Designer",               scope: "Designed the in-app communication experience for a food-delivery platform.",
-        images: [PH, PH, PH], link: null },
+        images: ["PH"], link: "panda.html" },
       { year: "2023", title: "Toku",               role: "Lead Product Designer",        scope: "Led end-to-end product design for a SaaS communication platform.",
-        images: ["images/tokucover.png", "images/Product-Design.png", PH], link: "toku.html" }
+        images: ["images/toku.png"], link: "toku.html" }
     ];
 
     const pages = {
