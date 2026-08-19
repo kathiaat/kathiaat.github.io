@@ -368,17 +368,85 @@
       .work-grid { grid-template-columns: 1fr; }
       .site-footer .links { gap: 32px; }
     }
+
+/* ---------- ABOUT overlay (swings in from top-left) ---------- */
+.more-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 170%; height: 170%;
+  padding: calc(4vh + clamp(24px, 2.1vw, 40px)) 0 0;
+  background: #111;
+  color: #fff;
+  z-index: 80;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+  transition: transform .9s cubic-bezier(.77, 0, .18, 1);
+  overflow-y: auto;
+  pointer-events: none;
+}
+body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
+
+.more-close {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.15vw, 22px);
+  letter-spacing: 0.08em;
+  color: #fff;
+  display: block;
+  margin-left: clamp(20px, 5vw, 60px);
+}
+.more-close:hover { font-style: italic; }
+
+.more-inner {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: clamp(40px, 6vw, 120px);
+  margin: clamp(44px, 8vh, 90px) auto 0;
+  width: 58%;
+}
+.more-statement {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 32px);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  border-top: 1px solid #fff;
+  padding-top: clamp(20px, 3vh, 36px);
+  margin: 0;
+}
+.more-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid #fff;
+  padding-top: clamp(20px, 3vh, 36px);
+  font-family: var(--serif);
+  font-size: clamp(13px, 1vw, 16px);
+  letter-spacing: 0.06em;
+}
+.more-label {
+  font-family: var(--helv);
+  font-weight: 500;
+  font-size: clamp(11px, 0.8vw, 14px);
+  letter-spacing: 0.1em;
+  margin: 0 0 6px;
+}
+.more-side a { color: #fff; width: fit-content; }
+.more-side a:hover { font-style: italic; }
+.more-gap { height: clamp(20px, 3vh, 40px); }
+@media (max-width: 820px) {
+  .more-inner { grid-template-columns: 1fr; width: 84%; }
+}
+    
   </style>
 </head>
 <body class="intro">
 
   <header class="site-header">
-    <a class="corner" href="#about" data-modal="about">ABOUT</a>
+    <a class="corner" id="more-link" href="#more">ABOUT</a>
     <h1 class="wordmark">
       <span class="kathia">KATHIA</span>
       <span class="anaid">ANAID</span>
     </h1>
-    <a class="corner corner--right" href="#contact" data-modal="contact">CONTACT</a>
+   
   </header>
 
   <main>
@@ -416,6 +484,24 @@
     </div>
   </footer>
 
+<!-- ABOUT overlay -->
+<div class="more-overlay" id="more-overlay">
+  <a class="more-close" id="more-close" href="#">CLOSE</a>
+  <div class="more-inner">
+    <p class="more-statement">Multidisciplinary designer in New York — blending UX/UI, brand, and AI to create intuitive, human-centered systems and experiences. Currently open to select projects.</p>
+    <div class="more-side">
+      <p class="more-label">CONTACT</p>
+      <a href="mailto:kathiaawork@gmail.com">kathiaawork@gmail.com</a>
+      <a href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="#" target="_blank" rel="noopener">SUBSTACK</a>
+      <div class="more-gap"></div>
+      <p class="more-label">BASED IN</p>
+      <span>New York</span>
+    </div>
+  </div>
+</div>
+
+  
   <!-- Case study / About / Contact popup -->
   <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-card" id="modal-card">
@@ -622,6 +708,18 @@
         fill(pages[a.dataset.modal]);
       });
     });
+
+const moreLink  = document.getElementById("more-link");
+const moreClose = document.getElementById("more-close");
+function closeMore() { document.body.classList.remove("more-open"); document.body.style.overflow = ""; }
+if (moreLink) moreLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.body.classList.add("more-open");
+  document.body.style.overflow = "hidden";
+});
+if (moreClose) moreClose.addEventListener("click", (e) => { e.preventDefault(); closeMore(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMore(); });
+    
   </script>
 </body>
 </html>
