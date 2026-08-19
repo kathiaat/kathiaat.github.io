@@ -440,7 +440,7 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
 <body class="intro">
 
   <header class="site-header">
-    <a class="corner" id="more-link" href="#more">ABOUT</a>
+    <a class="corner" id="more-link" href="#more">MORE+</a>
     <h1 class="wordmark">
       <span class="kathia">KATHIA</span>
       <span class="anaid">ANAID</span>
@@ -483,7 +483,7 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
     </div>
   </footer>
 
-<!-- ABOUT overlay -->
+<!-- MORE+ overlay -->
 <div class="more-overlay" id="more-overlay">
   <a class="more-close" id="more-close" href="#">CLOSE</a>
   <div class="more-inner">
@@ -611,7 +611,15 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
         `<span class="c-title">${p.title}</span>` +
         `<span class="c-role">${p.role}</span>` +
         `<span class="c-scope">${p.scope}</span>`;
-      row.addEventListener("click", () => openProject(i));
+
+      row.addEventListener("click", () => {
+  if (p.link) {
+    window.location.href = p.link;
+  } else {
+    openProject(i);
+  }
+});
+      
       list.appendChild(row);
     });
 
