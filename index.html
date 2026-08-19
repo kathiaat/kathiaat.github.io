@@ -374,66 +374,77 @@
   position: fixed;
   top: 0; left: 0;
   width: 170%; height: 170%;
-  padding: calc(4vh + clamp(24px, 2.1vw, 40px)) 0 0;
   background: #111;
   color: #fff;
   z-index: 80;
   transform: rotate(-90deg);
   transform-origin: 0 0;
   transition: transform .9s cubic-bezier(.77, 0, .18, 1);
-  overflow-y: auto;
+  overflow: hidden;
   pointer-events: none;
 }
 body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
-
+.more-frame {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: clamp(24px, 2.1vw, 40px) var(--pad) clamp(28px, 3vw, 48px);
+}
 .more-close {
   font-family: var(--serif);
   font-size: clamp(15px, 1.15vw, 22px);
   letter-spacing: 0.08em;
   color: #fff;
   display: block;
-  margin-left: clamp(20px, 5vw, 60px);
 }
 .more-close:hover { font-style: italic; }
-
 .more-inner {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: clamp(28px, 4vh, 48px);
-  margin: clamp(44px, 8vh, 90px) 0 0 clamp(24px, 5vw, 60px);
-  max-width: 620px;
+  max-width: 900px;
+  padding: clamp(48px, 8vh, 96px) 0;
 }
 .more-statement {
-  font-family: var(--serif);
-  font-size: clamp(20px, 2vw, 32px);
-  line-height: 1.4;
-  letter-spacing: 0.02em;
-  border-top: 1px solid #fff;
-  padding-top: clamp(20px, 3vh, 36px);
+  font-family: var(--helv);
+  font-weight: 500;
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
   margin: 0;
 }
-.more-side {
+.more-contact {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  border-top: 1px solid #fff;
-  padding-top: clamp(20px, 3vh, 36px);
+  gap: 10px;
   font-family: var(--serif);
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: clamp(16px, 1.15vw, 22px);
   letter-spacing: 0.06em;
+  margin-top: clamp(12px, 2vh, 24px);
 }
-
-    
 .more-label {
   font-family: var(--helv);
   font-weight: 500;
   font-size: clamp(11px, 0.8vw, 14px);
   letter-spacing: 0.1em;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
+  color: #fff;
 }
-.more-side a { color: #fff; width: fit-content; }
-.more-side a:hover { font-style: italic; }
-.more-gap { height: clamp(20px, 3vh, 40px); }
+.more-contact a { color: #fff; width: fit-content; }
+.more-contact a:hover { font-style: italic; }
+.more-footer {
+  display: flex;
+  gap: clamp(40px, 4.2vw, 80px);
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.15vw, 22px);
+  letter-spacing: 0.08em;
+}
+.more-footer a { color: #fff; }
+.more-footer a:hover { font-style: italic; }
     
   </style>
 </head>
@@ -485,17 +496,18 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
 
 <!-- MORE+ overlay -->
 <div class="more-overlay" id="more-overlay">
-  <a class="more-close" id="more-close" href="#">CLOSE</a>
-  <div class="more-inner">
-    <p class="more-statement">Multidisciplinary designer in New York — blending UX/UI, brand, and AI to create intuitive, human-centered systems and experiences. Currently open to select projects.</p>
-    <div class="more-side">
-      <p class="more-label">CONTACT</p>
-      <a href="mailto:kathiaawork@gmail.com">kathiaawork@gmail.com</a>
+  <div class="more-frame">
+    <a class="more-close" id="more-close" href="#">CLOSE</a>
+    <div class="more-inner">
+      <p class="more-statement">Multidisciplinary designer in New York — blending UX/UI, brand, and AI to create intuitive, human-centered systems and experiences. Currently open to select projects.</p>
+      <div class="more-contact">
+        <p class="more-label">CONTACT</p>
+        <a href="mailto:kathiaawork@gmail.com">kathiaawork@gmail.com</a>
+      </div>
+    </div>
+    <div class="more-footer">
       <a href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">INSTAGRAM</a>
       <a href="#" target="_blank" rel="noopener">SUBSTACK</a>
-      <div class="more-gap"></div>
-      <p class="more-label">BASED IN</p>
-      <span>New York</span>
     </div>
   </div>
 </div>
