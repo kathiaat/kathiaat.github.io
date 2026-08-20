@@ -60,20 +60,21 @@
 
     /* ── Content ── */
 
-        .content {
+    .content {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: clamp(6px, 1vw, 10px) var(--pad) clamp(6px, 0.8vw, 9px);
+      padding: clamp(2px, 0.4vw, 4px) var(--pad) clamp(2px, 0.3vw, 3px);
     }
 
     .meta {
       display: flex;
       flex-direction: column;
       gap: 4px;
-      margin-bottom: clamp(5px, 0.8vw, 8px);
-      padding-bottom: clamp(5px, 0.6vw, 7px);
+      margin-bottom: clamp(2px, 0.3vw, 3px);
+      padding-bottom: clamp(2px, 0.3vw, 3px);
       border-bottom: 1px solid var(--rule);
     }
+    
     .meta-label { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin: 0; }
     .meta h1    { font-size: clamp(13px, 1.3vw, 15px); font-weight: 400; letter-spacing: 0.04em; margin: 0; line-height: 1.1; }
     .meta-tags  { font-size: 13px; letter-spacing: 0.08em; color: var(--muted); margin: 8px 0 0; }
@@ -270,21 +271,18 @@
   </header>
 
   <div class="content">
-    <div class="meta">
-      <p class="meta-label">01 / Case Study</p>
+
+        <div class="meta">
       <h1>Artificial Intelligence</h1>
-      <p class="meta-tags">AI Design · Generative · UX/UI</p>
     </div>
+    
   </div>
 
   <section class="ai-hero">
     <div class="ai-hero-inner">
-      <p class="ai-hero-text">A selection of personal work crafted with the help of Artificial Intelligence.</p>
-      <div class="ai-hero-years">
-        <p class="ai-hero-label">Years</p>
-        <p class="ai-hero-value">2022 – 2026</p>
+      <p class="ai-hero-text">A conceptual selection of work made with AI.</p>
+
       </div>
-    </div>
   </section>
 
   <!-- ── Image Grid ─────────────────────────────────────────────────────────
