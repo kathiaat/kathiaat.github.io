@@ -38,12 +38,16 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── Header ── */
+      /* ── Header ── */
     .site-header {
+      background: #fff;
       padding: clamp(28px, 4vw, 44px) var(--pad);
       display: flex;
       justify-content: center;
+      position: relative;
+      z-index: 2;
     }
+    
     .wordmark {
       font-weight: 400;
       font-size: clamp(20px, 2.4vw, 28px);
@@ -77,8 +81,27 @@
     .intro p { margin: 0 0 1em; }
     .intro p:last-child { margin: 0; }
 
+    /* ── Black intro band ── */
+    .ai-hero { background: #111; color: #f2f2f2; }
+    .ai-hero-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 64px) var(--pad);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 6vw, 120px);
+      align-items: start;
+    }
+    .ai-hero-text { font-size: clamp(16px, 1.6vw, 20px); line-height: 1.6; max-width: 480px; margin: 0; }
+    .ai-hero-label { font-weight: 700; font-size: 15px; margin: 0 0 4px; }
+    .ai-hero-value { font-size: 15px; margin: 0; color: #cfcfcf; }
+    @media (max-width: 640px) {
+      .ai-hero-inner { grid-template-columns: 1fr; gap: 20px; }
+    }
+
     /* ── Image Grid ── */
-    .grid-section {
+    .grid-section { background: #111; }
+    .grid-section-inner {
       max-width: var(--maxw);
       margin: 0 auto;
       padding: 0 var(--pad) clamp(60px, 8vw, 100px);
@@ -86,7 +109,7 @@
 
     .img-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
@@ -251,18 +274,25 @@
       <h1>Artificial Intelligence</h1>
       <p class="meta-tags">AI Design · Generative · UX/UI</p>
     </div>
-    <div class="intro">
-      <p>Add your AI project overview here — the brief, the challenge, and what made this work unique.</p>
-      <p>Describe your process and the outcome.</p>
-    </div>
   </div>
+
+  <section class="ai-hero">
+    <div class="ai-hero-inner">
+      <p class="ai-hero-text">A selection of personal work crafted with the help of Artificial Intelligence.</p>
+      <div class="ai-hero-years">
+        <p class="ai-hero-label">Years</p>
+        <p class="ai-hero-value">2022 – 2026</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ── Image Grid ─────────────────────────────────────────────────────────
        3 columns × 3 rows = 9 images, each 425 × 560 px ratio.
        To add an image: remove the <div class="grid-placeholder"> and
        uncomment the <img> line above it. Point src= to your file.
   ──────────────────────────────────────────────────────────────────────── -->
-  <section class="grid-section" aria-label="AI Work Gallery">
+   <section class="grid-section" aria-label="AI Work Gallery">
+    <div class="grid-section-inner">
     <div class="img-grid">
 
       <div class="grid-item" tabindex="0" role="button" aria-label="AI image 1">
@@ -309,6 +339,11 @@
         <!-- <img src="images/ai/9.jpg" alt="AI Work 9" loading="lazy" /> -->
         <div class="grid-placeholder">09</div>
       </div>
+
+          </div>
+  </section>
+
+  <!-- ── Lightbox ── -->
 
     </div>
   </section>
