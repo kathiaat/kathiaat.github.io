@@ -122,11 +122,11 @@
     .intro p:last-child { margin: 0; }
 
     /* ---------- Overview image ---------- */
-    .overview-img {
+      .overview-img {
       width: 100%;
       border-radius: 8px;
       overflow: hidden;
-      margin-bottom: clamp(40px, 6vw, 64px);
+      margin-bottom: clamp(16px, 2vw, 24px);
     }
     .overview-img img { width: 100%; height: auto; display: block; }
     .overview-img-placeholder {
@@ -371,18 +371,17 @@
   <div class="content">
 
     <div class="meta">
-      <p class="meta-label">03 / Case Study</p>
       <h1>Toku</h1>
       <p class="meta-tags">Product Design · UX/UI</p>
     </div>
 
     <div class="intro">
-      <p>Add your project overview here — the brief, the challenge, and what made this project unique.</p>
-      <p>Describe the outcome and your role.</p>
+      <p>Toku is a cloud-native, AI-powered customer experience and communications provider that specializes in helping enterprises manage complex, cross-border digital interactions across the Asia-Pacific (APAC) region and beyond.</p>
+      <p>I joined Toku's product development team to bring order to a technically dense, multi-market product,  shaping its brand identity and UX/UI across the core platforms and website into something that felt clear, cohesive, and human.</p>
     </div>
 
     <div class="overview-img">
-      <img src="images/tokucover.png" alt="Toku overview" loading="lazy" />
+           <img src="images/tokuas/tokulp.mov" alt="Toku overview" loading="lazy" />
     </div>
 
     <div class="accordion">
@@ -504,29 +503,10 @@
 
   </div>
 
-  <nav class="floating-nav" aria-label="Sections">
-    <a class="pill" href="index.html">Home</a>
-    <a class="pill" href="index.html">Projects</a>
-    <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
-      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </button>
-    <a class="pill" href="mailto:kathiaawork@gmail.com">Contact</a>
-    <a class="pill" href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">Instagram</a>
-  </nav>
 
   <script>
-    // Floating nav toggle
-    const body = document.body;
-    const toggle = document.querySelector('.toggle');
-    toggle.addEventListener('click', () => {
-      const expanded = body.dataset.nav === 'expanded';
-      body.dataset.nav = expanded ? 'collapsed' : 'expanded';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
-    });
-
     // Accordion
+  
     document.querySelectorAll('.acc-trigger').forEach(trigger => {
       trigger.addEventListener('click', () => {
         const row = trigger.closest('.acc-row');
