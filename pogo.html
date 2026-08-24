@@ -7,7 +7,7 @@
   <meta name="description" content="POGO — Branding & Website by Kathia Anaid" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+   <link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -22,12 +22,23 @@
       --rule: #d8d8d8;
       --mint: #cfe9d2;
       --mint-strong: #b9dfbe;
-      --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+         --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
       --jost: "Jost", system-ui, sans-serif;
+      --serif: "Libertinus Serif", "Times New Roman", Georgia, serif;
       --pad: clamp(20px, 5vw, 60px);
       --maxw: 1120px;
     }
-
+    .home-link {
+      position: fixed;
+      top: clamp(28px, 4vw, 44px);
+      left: clamp(20px, 5vw, 60px);
+      z-index: 200;
+      font-family: var(--serif);
+      font-size: clamp(15px, 1.15vw, 22px);
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+    .home-link:hover { font-style: italic; }
     body {
       background: var(--bg);
       color: var(--ink);
@@ -45,10 +56,10 @@
       justify-content: center;
     }
     .wordmark {
-      font-family: var(--jost);
-      font-weight: 400;
+      font-family: var(--sans);
+      font-weight: 500;
       font-size: clamp(20px, 2.4vw, 28px);
-      letter-spacing: 0.32em;
+      letter-spacing: 0.02em;
       text-transform: uppercase;
       display: flex;
       gap: clamp(24px, 4vw, 48px);
@@ -246,8 +257,9 @@
   </style>
 </head>
 <body data-nav="collapsed">
-
+  <a class="home-link" href="index.html">HOME</a>
   <header class="site-header">
+  
     <a href="index.html" aria-label="Home">
       <h1 class="wordmark"><span>Kathia</span><span>Anaid</span></h1>
     </a>
