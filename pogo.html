@@ -163,6 +163,40 @@
       display: block;
     }
 
+    /* ── Multi-image rows (matches the Figma grid rhythm) ── */
+    .img-row,
+    .img-row-3 {
+      display: grid;
+      gap: clamp(12px, 1.6vw, 22px);
+      margin-bottom: clamp(24px, 3vw, 36px);
+      align-items: start;
+    }
+    .img-row   { grid-template-columns: 1fr 1fr; }
+    .img-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .img-row .img-slot,
+    .img-row-3 .img-slot { margin: 0; }
+
+    
+    /* ── Image + text row (image left, copy right) ── */
+    .img-text {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) 1fr;
+      gap: clamp(28px, 5vw, 72px);
+      align-items: center;
+      margin-bottom: clamp(24px, 3vw, 36px);
+    }
+    .img-text .img-slot { margin: 0; }
+    .img-text__copy p {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: clamp(16px, 1.6vw, 22px);
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0;
+      max-width: 42ch;
+    }
+    
+
     /* ── Quote block between image sections ── */
     .text-block {
       font-family: var(--sans);
@@ -250,6 +284,9 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
+    @media (max-width: 640px) {
+       .img-row, .img-row-3, .img-text { grid-template-columns: 1fr; }
+    }
     @media (max-width: 540px) {
       .meta-row { grid-template-columns: 1fr 1fr; }
       .wordmark { letter-spacing: 0.24em; gap: 18px; }
@@ -289,17 +326,21 @@
       </div>
     </div>
 
-    <!-- ── Image block 1 (2 images) ── -->
+    <!-- Opener - full width (Figma: header image / hero) -->
     <div class="img-block">
-
       <div class="img-slot">
         <img src="images/pogoimages/1pogo.jpeg" alt="POGO" loading="lazy" />
       </div>
+    </div>
 
+
+    <div class="img-text">
       <div class="img-slot">
-        <img src="images/pogoimages/2pogo.png" alt="POGO" loading="lazy" />
+        <img src="images/pogoimages/2pogo.png" alt="POGO wordmark embossed on navy" loading="lazy" />
       </div>
-
+      <div class="img-text__copy">
+        <p>POGO is a new project that starts with the basics: effortless French style meets NYC energy. Athletic but artful, it's all about movement for the everyday. The wordmark leans into a bit of old-world heritage while keeping things modern, with a neutral palette tying it all together.</p>
+      </div>
     </div>
 
     <!-- ── Quote ── -->
@@ -307,29 +348,77 @@
       <p>We are evolving the daily uniform by removing the synthetic and elevating the essential</p>
     </div>
 
-    <!-- ── Image block 2 (5 images) ── -->
-    <div class="img-block">
-
+    <!-- Pair - 2-up (Figma: two-image row / card3) -->
+    <div class="img-row">
       <div class="img-slot">
-        <img src="images/pogoimages/3pogo.jpeg" alt="POGO" loading="lazy" />
+        <img src="images/pogoimages/card2.png" alt="POGO" loading="lazy" />
       </div>
-
       <div class="img-slot">
         <img src="images/pogoimages/4pogo.png" alt="POGO" loading="lazy" />
       </div>
+    </div>
 
+    <!-- Full width (Figma: wide editorial / type specimen) -->
+    <div class="img-block">
       <div class="img-slot">
         <img src="images/pogoimages/5pogo.jpeg" alt="POGO" loading="lazy" />
       </div>
+    </div>
 
+     <div class="text-block">
+      <p>Designed with a modern man in mind, POGO's palette leans into French neutrality: refined, understated, quietly energizing. </p>
+  <p> Blue and white, soft grays, shadow black, and the signature POGO blue give it an effortless masculine edge, honoring the </p>
+<p>brand's heritage while lifting the overall tone. It works seamlessly across print and screen.</p>
+    </div>
+    
+
+    <!-- Pair - 2-up (Figma: product shots, card7 + card8) -->
+    <div class="img-row">
       <div class="img-slot">
-        <img src="images/pogoimages/6pogo.jpeg" alt="POGO" loading="lazy" />
+        <img src="images/pogoimages/card3.png" alt="POGO" loading="lazy" />
       </div>
-
       <div class="img-slot">
         <img src="images/pogoimages/7pogo.jpeg" alt="POGO" loading="lazy" />
       </div>
+    </div>
 
+
+    
+    <!-- Full width (Figma: big POGO on blue / image 678) -->
+    <div class="img-block">
+      <div class="img-slot">
+        <img src="images/pogoimages/8pogo.jpeg" alt="POGO" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Pair - 2-up (Figma: logo lockups - hangtag + wordmark set) -->
+    <div class="img-row">
+      <div class="img-slot">
+        <img src="images/pogoimages/9pogo.jpeg" alt="POGO" loading="lazy" />
+      </div>
+      <div class="img-slot">
+        <img src="images/pogoimages/10pogo.jpeg" alt="POGO" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Trio - 3-up (Figma: phone mockups, card11) -->
+    <div class="img-row-3">
+      <div class="img-slot">
+        <img src="images/pogoimages/11pogo.jpeg" alt="POGO mobile" loading="lazy" />
+      </div>
+      <div class="img-slot">
+        <img src="images/pogoimages/12pogo.jpeg" alt="POGO mobile" loading="lazy" />
+      </div>
+      <div class="img-slot">
+        <img src="images/pogoimages/13pogo.jpeg" alt="POGO mobile" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Close - full width (Figma: final POGO wordmark / last) -->
+    <div class="img-block">
+      <div class="img-slot">
+        <img src="images/pogoimages/14pogo.jpeg" alt="POGO" loading="lazy" />
+      </div>
     </div>
 
     <!-- Project nav -->
