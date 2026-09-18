@@ -38,18 +38,18 @@
     }
 
     /* ---------- Fixed header ---------- */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      padding: 0 var(--pad-x);
-      z-index: 50;
-      pointer-events: none;
-    }
+  .site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* centers the wordmark */
+  padding: 0 var(--pad-x);
+  z-index: 50;
+  background: #fff;          /* solid white bar */
+  pointer-events: none;
+}
     .site-header a { pointer-events: all; }
     .wordmark {
       font-weight: 800;
@@ -314,18 +314,6 @@
       <a href="experential.html">Experential →</a>
     </div>
   </div>
-
-  <!-- Floating bottom nav -->
-  <nav class="floating-nav" aria-label="Sections">
-    <a class="pill" href="index.html">Home</a>
-    <a class="pill" href="projects.html">Projects</a>
-    <button class="toggle" type="button" aria-label="Open menu" aria-expanded="false">
-      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      <svg class="plus" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </button>
-    <a class="pill" href="mailto:kathiaawork@gmail.com">Contact</a>
-    <a class="pill" href="https://www.instagram.com/studionotes_?igsh=MTlxcDAxN3llYzBvMw%3D%3D" target="_blank" rel="noopener">Instagram</a>
-  </nav>
 
   <script>
     const body = document.body;
