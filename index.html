@@ -620,7 +620,10 @@ if (ready) tile.addEventListener("click", () => { window.location.href = p.link;
     }
     btnGrid.addEventListener("click", () => setView("grid"));
     btnList.addEventListener("click", () => setView("list"));
+     btnGrid.addEventListener("click", () => setView("grid"));
+    btnList.addEventListener("click", () => setView("list"));
     setView("grid");
+
     // ---------- MORE+ overlay ----------
     const moreLink  = document.getElementById("more-link");
     const moreClose = document.getElementById("more-close");
@@ -632,7 +635,6 @@ if (ready) tile.addEventListener("click", () => { window.location.href = p.link;
     });
     if (moreClose) moreClose.addEventListener("click", (e) => { e.preventDefault(); closeMore(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMore(); });
-
   </script>
 </body>
 </html>
