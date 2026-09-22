@@ -576,6 +576,7 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
       tile.type = "button";
       tile.className = "tile" + (cover ? "" : " tile--empty");
       tile.setAttribute("aria-label", p.title);
+      const ready = !!(p.link && !p.comingSoon);
   tile.innerHTML =
   (cover ? `<img src="${cover}" alt="${p.title}" loading="lazy" />` : "") +
   `<span class="tile-overlay">
@@ -585,7 +586,7 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
        : `<span class="tile-soon">Coming soon</span>`}
    </span>`;
       
-      tile.addEventListener("click", () => openProject(i));
+if (ready) tile.addEventListener("click", () => { window.location.href = p.link; });
       grid.appendChild(tile);
 
       const row = document.createElement("button");
@@ -597,13 +598,7 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
         `<span class="c-role">${p.role}</span>` +
         `<span class="c-scope">${p.scope}</span>`;
 
-      row.addEventListener("click", () => {
-  if (p.link) {
-    window.location.href = p.link;
-  } else {
-    openProject(i);
-  }
-});
+      if (ready) row.addEventListener("click", () => { window.location.href = p.link; });
       
       list.appendChild(row);
     });
@@ -622,96 +617,6 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
     btnList.addEventListener("click", () => setView("list"));
     setView("grid");
 
-    // ---------- Popup ----------
-    const modal   = document.getElementById("modal");
-    const card    = document.getElementById("modal-card");
-    const mImg    = document.getElementById("modal-img");
-    const mMeta   = document.getElementById("modal-meta");
-    const mTitle  = document.getElementById("modal-title");
-    const mText   = document.getElementById("modal-text");
-    const mCta    = document.getElementById("modal-cta");
-    const mSoon   = document.getElementById("modal-soon");
-    const mPrev   = document.getElementById("modal-prev");
-    const mNext   = document.getElementById("modal-next");
-    const mCount  = document.getElementById("modal-count");
-    let lastFocus = null;
-    let gallery   = [];
-    let galleryAt = 0;
-    let galleryTitle = "";
-
-    function showImage(i) {
-      if (!gallery.length) return;
-      galleryAt = (i + gallery.length) % gallery.length;
-      mImg.src = gallery[galleryAt];
-      mImg.alt = `${galleryTitle} — image ${galleryAt + 1} of ${gallery.length}`;
-      mCount.textContent = `${galleryAt + 1} / ${gallery.length}`;
-    }
-
-    function fill({ meta, title, text, images, link, html }) {
-      mMeta.textContent = meta;
-      mTitle.textContent = title;
-      if (html) { mText.innerHTML = text; } else { mText.textContent = text; }
-      gallery = (images || []).slice(0, 3); // max 3 images per popup
-      galleryTitle = title;
-      card.classList.toggle("no-image", !gallery.length);
-      const multi = gallery.length > 1;
-      mPrev.hidden = !multi;
-      mNext.hidden = !multi;
-      mCount.hidden = !multi;
-      showImage(0);
-      mCta.hidden = !link;
-      if (link) mCta.href = link;
-      mSoon.hidden = !!link || meta === "ABOUT" || meta === "CONTACT";
-      lastFocus = document.activeElement;
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      modal.querySelector(".modal-close").focus();
-    }
-
-    function openProject(i) {
-      const p = projects[i];
-      fill({ meta: `${p.year} — ${p.role}`, title: p.title, text: p.scope, images: p.images, link: p.link });
-    }
-
-    // If a listed file is missing, show the gray placeholder instead of a broken image
-    mImg.addEventListener("error", () => { if (mImg.src !== PH) mImg.src = PH; });
-
-    mPrev.addEventListener("click", () => showImage(galleryAt - 1));
-    mNext.addEventListener("click", () => showImage(galleryAt + 1));
-    document.addEventListener("keydown", (e) => {
-      if (modal.getAttribute("aria-hidden") === "true" || gallery.length < 2) return;
-      if (e.key === "ArrowLeft")  showImage(galleryAt - 1);
-      if (e.key === "ArrowRight") showImage(galleryAt + 1);
-    });
-
-    function closeModal() {
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      if (lastFocus) lastFocus.focus();
-    }
-
-    modal.querySelector(".modal-close").addEventListener("click", closeModal);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
-
-    document.querySelectorAll("[data-modal]").forEach(a => {
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        fill(pages[a.dataset.modal]);
-      });
-    });
-
-const moreLink  = document.getElementById("more-link");
-const moreClose = document.getElementById("more-close");
-function closeMore() { document.body.classList.remove("more-open"); document.body.style.overflow = ""; }
-if (moreLink) moreLink.addEventListener("click", (e) => {
-  e.preventDefault();
-  document.body.classList.add("more-open");
-  document.body.style.overflow = "hidden";
-});
-if (moreClose) moreClose.addEventListener("click", (e) => { e.preventDefault(); closeMore(); });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMore(); });
-    
   </script>
 </body>
 </html>
