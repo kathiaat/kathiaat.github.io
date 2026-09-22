@@ -153,22 +153,42 @@
       transition: transform .8s cubic-bezier(.22,.61,.36,1);
     }
     .tile:hover img, .tile:focus-visible img { transform: scale(1.03); }
-    .tile-label {
-      position: absolute; inset: 0;
-      display: flex; align-items: flex-end;
-      padding: 16px 18px;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 15px;
-      letter-spacing: 0.08em;
-      color: #fff;
-      background: linear-gradient(to top, rgba(0,0,0,.38), rgba(0,0,0,0) 55%);
-      opacity: 0;
-      transition: opacity .3s ease;
-    }
-    .tile--empty .tile-label { color: var(--soft); background: none; }
-    .tile:hover .tile-label, .tile:focus-visible .tile-label { opacity: 1; }
-    .tile:focus-visible { outline: 1px solid var(--soft); outline-offset: 3px; }
+  .tile-overlay {
+  position: absolute; inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: clamp(14px, 1.6vw, 22px);
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.08) 62%, rgba(0,0,0,0) 100%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  text-align: left;
+}
+.tile--empty .tile-overlay { color: var(--soft); background: none; }
+.tile:hover .tile-overlay, .tile:focus-visible .tile-overlay { opacity: 1; }
+.tile:not(.tile--ready) { cursor: default; }
+
+.tile-role {
+  font-family: var(--helv);
+  font-weight: 500;
+  font-size: clamp(10px, 0.68vw, 12px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: .9;
+}
+.tile-cta, .tile-soon {
+  font-family: var(--serif);
+  font-size: clamp(10px, 0.72vw, 12px);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+.tile-cta { border-bottom: 1px solid rgba(255,255,255,.85); width: fit-content; }
+.tile:hover .tile-cta, .tile:focus-visible .tile-cta { font-style: italic; }
+.tile-soon { font-style: italic; opacity: .75; }
+
+    
 
     /* ---------- List view ---------- */
     .work-list { padding: 0 var(--pad); display: none; }
@@ -222,42 +242,7 @@
     }
     .site-footer .links a:hover { font-style: italic; }
 
-    /* ---------- Case study popup ---------- */
-    .modal {
-      position: fixed; inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(16px, 4vw, 48px);
-      background: rgba(255,255,255,.72);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 50;
-    }
-    .modal[aria-hidden="false"] { display: flex; }
-    .modal-card {
-      position: relative;
-      background: #fff;
-      box-shadow: 0 24px 80px rgba(0,0,0,.12);
-      max-width: 1150px;
-      width: 100%;
-      max-height: 92vh;
-      overflow: auto;
-      display: grid;
-      grid-template-columns: 45% 1fr;
-    }
-    .modal-card.no-image { grid-template-columns: 1fr; max-width: 810px; }
-    .modal-media {
-      background: #d9d9d9;
-      min-height: clamp(480px, 68vh, 700px);
-      position: relative;
-    }
-    .modal-media img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .modal-card.no-image .modal-media { display: none; }
+
 
     /* Gallery arrows */
     .modal-arrow {
@@ -513,25 +498,6 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
 </div>
 
   
-  <!-- Case study / About / Contact popup -->
-  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-card" id="modal-card">
-      <button class="modal-close" type="button" aria-label="Close">&times;</button>
-      <div class="modal-media" id="modal-media">
-        <img id="modal-img" src="" alt="" />
-        <button class="modal-arrow modal-arrow--prev" id="modal-prev" type="button" aria-label="Previous image">&#8249;</button>
-        <button class="modal-arrow modal-arrow--next" id="modal-next" type="button" aria-label="Next image">&#8250;</button>
-        <span class="modal-count" id="modal-count"></span>
-      </div>
-      <div class="modal-body">
-        <p class="modal-meta" id="modal-meta"></p>
-        <h2 class="modal-title" id="modal-title"></h2>
-        <p class="modal-text" id="modal-text"></p>
-        <a class="modal-link" id="modal-cta" href="#">FULL CASE STUDY &#8599;</a>
-        <span class="modal-soon" id="modal-soon" hidden>Full case study coming soon</span>
-      </div>
-    </div>
-  </div>
 
   <script>
     // ---------- Project data (order matches Figma list view) ----------
@@ -610,8 +576,15 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
       tile.type = "button";
       tile.className = "tile" + (cover ? "" : " tile--empty");
       tile.setAttribute("aria-label", p.title);
-      tile.innerHTML = (cover ? `<img src="${cover}" alt="${p.title}" loading="lazy" />` : "") +
-        `<span class="tile-label">${p.title}</span>`;
+  tile.innerHTML =
+  (cover ? `<img src="${cover}" alt="${p.title}" loading="lazy" />` : "") +
+  `<span class="tile-overlay">
+     <span class="tile-role">${p.role}</span>
+     ${ready
+       ? `<span class="tile-cta">FULL CASE STUDY &#8599;</span>`
+       : `<span class="tile-soon">Coming soon</span>`}
+   </span>`;
+      
       tile.addEventListener("click", () => openProject(i));
       grid.appendChild(tile);
 
