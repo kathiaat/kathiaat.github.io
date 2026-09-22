@@ -154,8 +154,8 @@
 }
 .tile:hover img, .tile:focus-visible img {
   transform: scale(1.05);
-  filter: blur(6px);
-  opacity: 0.55;
+  filter: blur(8px);
+  opacity: 0.65;
 }
     
   .tile-overlay {
@@ -516,15 +516,15 @@ body.more-open .more-overlay { transform: rotate(0deg); pointer-events: auto; }
     // popup when there is more than one.
     const projects = [
       { year: "2026", title: "WIP",        role: "Creative Direction - Product", scope: "Work in progress",
-        images: ["images/wip.png", "PN/1-Header.png", "PN/2.Moodboard.png"], link: "replace.html" , comingSoon: true },
+        images: ["images/wip.png", "PN/1-Header.png", "PN/2.Moodboard.png"], link: "replace.html", comingSoon: true },
       { year: "2026", title: "Korres",              role: "Designer/Drafter",             scope: "Designed and drafted a pop-up retail activation for the Korres × Myka collaboration.",
-        images: ["images/korres.png"], link: "korres.html" , comingSoon: true },
+        images: ["images/korres.png"], link: "korres.html", comingSoon: true },
       { year: "2026", title: "Marketing",             role: "Designer/Strategy",             scope: "Produced marketing content adapted across a range of formats and channels.",
         images: ["images/marketing.gif"], link: "marketing.html" }, // single image — no arrows
       { year: "2026", title: "AI Series", role: "Multi-format Designer",        scope: "Explored conceptual design through self-directed, AI-driven experimentation.",
         images: ["images/AI.png"], link: "ai.html" },
       { year: "2026", title: "Tagto",          role: "Product Designer",                     scope: "Created a label-scanning tool that surfaces bite-sized product info for smarter purchases..",
-        images: ["images/tagto.png"], link: "tagto.html" , comingSoon: true },
+        images: ["images/tagto.png"], link: "tagto.html", comingSoon: true },
       { year: "2025", title: "POGO",               role: "Creative Direction",           scope: "Set creative direction and built brand and marketing assets for a men's underwear label.",
         images: ["images/pogo.png"], link: "pogo.html" },
       { year: "2025", title: "Food Panda",         role: "UX/UI Designer",               scope: "Designed the in-app communication experience for a food-delivery platform.",
@@ -621,6 +621,17 @@ if (ready) tile.addEventListener("click", () => { window.location.href = p.link;
     btnGrid.addEventListener("click", () => setView("grid"));
     btnList.addEventListener("click", () => setView("list"));
     setView("grid");
+    // ---------- MORE+ overlay ----------
+    const moreLink  = document.getElementById("more-link");
+    const moreClose = document.getElementById("more-close");
+    function closeMore() { document.body.classList.remove("more-open"); document.body.style.overflow = ""; }
+    if (moreLink) moreLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.body.classList.add("more-open");
+      document.body.style.overflow = "hidden";
+    });
+    if (moreClose) moreClose.addEventListener("click", (e) => { e.preventDefault(); closeMore(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMore(); });
 
   </script>
 </body>
