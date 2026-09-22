@@ -14,7 +14,7 @@
     img, svg { display: block; max-width: 100%; height: auto; }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; background: none; border: none; cursor: pointer; padding: 0; color: inherit; }
-
+ 
     :root {
       --bg: #ffffff;
       --ink: #111111;
@@ -26,7 +26,7 @@
       --pad-x: clamp(32px, 4vw, 64px);
       --header-h: clamp(68px, 7vw, 88px);
     }
-
+ 
     body {
       background: var(--bg);
       color: var(--ink);
@@ -36,21 +36,19 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
-
+ 
     /* ---------- Fixed header ---------- */
-  .site-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--header-h);
-  display: flex;
-  align-items: center;
-  justify-content: center;   /* centers the wordmark */
-  padding: 0 var(--pad-x);
-  z-index: 50;
-  background: #fff;          /* solid white bar */
-  pointer-events: none;
-}
-    .site-header a { pointer-events: all; }
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;   /* centers the wordmark */
+      padding: 0 var(--pad-x);
+      z-index: 50;
+      background: #fff;          /* solid white bar */
+    }
     .wordmark {
       font-weight: 800;
       font-size: clamp(18px, 2vw, 24px);
@@ -61,12 +59,12 @@
       margin: 0;
       color: var(--ink);
     }
-
+ 
     /* ---------- Stacking panels ---------- */
     .panels {
       position: relative;
     }
-
+ 
     .panel {
       position: sticky;
       top: 0;
@@ -75,12 +73,12 @@
       grid-template-columns: 44fr 56fr;
       overflow: hidden;
     }
-
+ 
     .panel:nth-child(1) { z-index: 1; }
     .panel:nth-child(2) { z-index: 2; }
     .panel:nth-child(3) { z-index: 3; }
     .panel:nth-child(4) { z-index: 4; }
-
+ 
     /* ---------- Left column ---------- */
     .panel-left {
       background: #f5f0ea;
@@ -91,14 +89,14 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
+ 
     .panel-counter {
       font-size: 11px;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--muted);
     }
-
+ 
     .panel-display {
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(28px, 2.5vw, 42px);
@@ -108,7 +106,7 @@
       margin: 0;
       color: var(--ink);
     }
-
+ 
     /* ---------- Right column ---------- */
     .panel-right {
       position: relative;
@@ -117,12 +115,12 @@
       align-items: center;
       justify-content: center;
     }
-
+ 
     .panel:nth-child(1) .panel-right { background: #1e1c1a; }
     .panel:nth-child(2) .panel-right { background: #192118; }
     .panel:nth-child(3) .panel-right { background: #191c28; }
     .panel:nth-child(4) .panel-right { background: #201b16; }
-
+ 
     .panel-right img {
       position: absolute;
       inset: 0;
@@ -130,14 +128,14 @@
       height: 100%;
       object-fit: cover;
     }
-
+ 
     .panel-right-placeholder {
       color: rgba(255,255,255,.12);
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
     }
-
+ 
     /* ---------- Footer ---------- */
     .footer-section {
       background: var(--bg);
@@ -162,68 +160,13 @@
       transition: color .2s ease;
     }
     .project-nav a:hover { color: var(--ink); }
-
-    /* ---------- Floating nav ---------- */
-    .floating-nav {
-      position: fixed;
-      bottom: clamp(20px, 3vh, 32px);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: clamp(10px, 1.4vw, 18px);
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .pill {
-      border: 1px solid #d8d8d8;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(8px);
-      border-radius: 999px;
-      padding: 14px clamp(20px, 2.4vw, 32px);
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink);
-      transition: opacity .3s ease, transform .3s ease, background .2s ease, border-color .2s ease;
-      white-space: nowrap;
-    }
-    .pill:hover { background: #fafafa; border-color: #c4c4c4; transform: translateY(-1px); }
-
-    .toggle {
-      width: 52px; height: 52px;
-      border-radius: 999px;
-      background: var(--mint);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .25s ease, transform .25s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
-      flex-shrink: 0;
-      box-shadow: 0 6px 20px rgba(143,199,154,.35);
-    }
-    .toggle:hover { background: var(--mint-strong); transform: rotate(90deg); }
-    .toggle svg { width: 18px; height: 18px; stroke: #1d1d1d; stroke-width: 1.5; fill: none; }
-
-    body[data-nav="expanded"] .toggle { width: 44px; height: 44px; box-shadow: 0 4px 12px rgba(143,199,154,.3); }
-    body[data-nav="expanded"] .toggle svg { width: 16px; height: 16px; }
-
-    body[data-nav="collapsed"] .pill {
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      width: 0; padding: 0; border: 0; margin: 0;
-      overflow: hidden; white-space: nowrap;
-    }
-    body[data-nav="collapsed"] .toggle .x { display: none; }
-    body[data-nav="expanded"]  .toggle .plus { display: none; }
-
+ 
     ::selection { background: var(--mint); color: var(--ink); }
-
+ 
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
-
+ 
     /* ---------- Mobile ---------- */
     @media (max-width: 768px) {
       .panel {
@@ -242,8 +185,8 @@
     }
   </style>
 </head>
-<body data-nav="collapsed">
-
+<body>
+ 
   <!-- Fixed wordmark -->
   <header class="site-header">
     <a href="index.html" aria-label="Home">
@@ -253,10 +196,10 @@
       </h1>
     </a>
   </header>
-
+ 
   <!-- Stacking scroll panels -->
   <div class="panels">
-
+ 
     <!-- 01 Strategy -->
     <div class="panel">
       <div class="panel-left">
@@ -265,10 +208,9 @@
       </div>
       <div class="panel-right">
         <img src="images/mktg/mkst.png" alt="Strategy" loading="lazy" />
-       
       </div>
     </div>
-
+ 
     <!-- 02 Campaigns -->
     <div class="panel">
       <div class="panel-left">
@@ -276,11 +218,10 @@
         <p class="panel-display">Every touchpoint is a chance to say something worth remembering.</p>
       </div>
       <div class="panel-right">
-       <img src="images/mktg/mkca.png" alt="Campaigns" loading="lazy" />
-       
+        <img src="images/mktg/mkca.png" alt="Campaigns" loading="lazy" />
       </div>
     </div>
-
+ 
     <!-- 03 Landing Pages -->
     <div class="panel">
       <div class="panel-left">
@@ -288,11 +229,10 @@
         <p class="panel-display">One page. One goal. Every element earning its place.</p>
       </div>
       <div class="panel-right">
-    <img src="images/mktg/mklp.png" alt="Landing Pages" loading="lazy" />
-     
+        <img src="images/mktg/mklp.png" alt="Landing Pages" loading="lazy" />
       </div>
     </div>
-
+ 
     <!-- 04 Social Assets -->
     <div class="panel">
       <div class="panel-left">
@@ -300,13 +240,13 @@
         <p class="panel-display">Built to stop the scroll and built to last beyond it.</p>
       </div>
       <div class="panel-right">
-       <img src="images/mktg/mksa.png" alt="Social Assets" loading="lazy" />
+        <img src="images/mktg/mksa.png" alt="Social Assets" loading="lazy" />
         <span class="panel-right-placeholder"></span>
       </div>
     </div>
-
+ 
   </div>
-
+ 
   <!-- Project nav footer -->
   <div class="footer-section">
     <div class="project-nav">
@@ -314,16 +254,7 @@
       <a href="experential.html">Experential →</a>
     </div>
   </div>
-
-  <script>
-    const body = document.body;
-    const toggle = document.querySelector('.toggle');
-    toggle.addEventListener('click', () => {
-      const expanded = body.dataset.nav === 'expanded';
-      body.dataset.nav = expanded ? 'collapsed' : 'expanded';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
-    });
-  </script>
+ 
 </body>
 </html>
+ 
