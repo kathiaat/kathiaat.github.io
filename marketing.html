@@ -124,6 +124,42 @@
       color: var(--ink);
     }
  
+    /* Copy block under the headline */
+    .panel-copy {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px, 1.4vw, 22px);
+      max-width: 34em;
+    }
+    .panel-body {
+      font-size: clamp(14px, 1vw, 16px);
+      line-height: 1.65;
+      font-weight: 400;
+      color: #3a3a3a;
+      margin: 0;
+    }
+    .panel-body code {
+      font-family: inherit;
+      font-weight: 500;
+    }
+    .panel-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .panel-tags li {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid #d9d2c8;
+      border-radius: 999px;
+      padding: 5px 12px;
+    }
+
     /* ---------- Right column ---------- */
     .panel-right {
       position: relative;
@@ -196,6 +232,9 @@
         justify-content: flex-start;
       }
       .panel-right { min-height: 0; }
+      .panel-left { justify-content: space-between; }
+      .panel-tags { display: none; }
+      .panel-body { font-size: 13.5px; }
     }
     @media (max-width: 540px) {
       .wordmark { gap: 18px; }
@@ -223,7 +262,11 @@
     <div class="panel">
       <div class="panel-left">
         <span class="panel-counter"><b>Strategy</b></span>
-        <p class="panel-display">Good work starts before the first brief is written.</p>
+        <div class="panel-copy">
+          <p class="panel-display">Good work starts before the first brief is written.</p>
+          <p class="panel-body">I start with research, audience, and positioning, then turn it into clear creative direction. I also write strategy as Markdown (<code>.md</code>) files: brand voice, messaging, and AI prompt guides that teams and AI tools can reuse on every project.</p>
+          <ul class="panel-tags"><li>Research</li><li>Positioning</li><li>Brand voice</li><li>.md playbooks</li></ul>
+        </div>
       </div>
       <div class="panel-right">
         <img src="images/mktg/mkst.png" alt="Strategy" loading="lazy" />
@@ -234,7 +277,11 @@
     <div class="panel">
       <div class="panel-left">
         <span class="panel-counter"><b>Campaigns</b></span>
-        <p class="panel-display">Every touchpoint is a chance to say something worth remembering.</p>
+        <div class="panel-copy">
+          <p class="panel-display">Every touchpoint is a chance to say something worth remembering.</p>
+          <p class="panel-body">Concept, messaging, and rollout across email, social, and web, then measured and refined with performance data so each campaign gets sharper than the last.</p>
+          <ul class="panel-tags"><li>Campaign concepts</li><li>Email & Klaviyo</li><li>Performance</li></ul>
+        </div>
       </div>
       <div class="panel-right">
         <img src="images/mktg/mkca.png" alt="Campaigns" loading="lazy" />
@@ -245,7 +292,11 @@
     <div class="panel">
       <div class="panel-left">
         <span class="panel-counter"><b>Landing Pages</b></span>
-        <p class="panel-display">One page. One goal. Every element earning its place.</p>
+        <div class="panel-copy">
+          <p class="panel-display">One page. One goal. Every element earning its place.</p>
+          <p class="panel-body">I design and build landing pages that transform a visit into an experience: story-led layouts, interaction, and motion that guide people toward one clear action. From Figma to live, responsive on every screen.</p>
+          <ul class="panel-tags"><li>UX/UI</li><li>Experience design</li><li>Conversion</li><li>Responsive build</li></ul>
+        </div>
       </div>
       <div class="panel-right">
         <img src="images/mktg/mklp.png" alt="Landing Pages" loading="lazy" />
@@ -256,7 +307,11 @@
     <div class="panel">
       <div class="panel-left">
         <span class="panel-counter"><b>Social Assets</b></span>
-        <p class="panel-display">Built to stop the scroll and built to last beyond it.</p>
+        <div class="panel-copy">
+          <p class="panel-display">Built to stop the scroll and built to last beyond it.</p>
+          <p class="panel-body">Platform-native assets built from one consistent visual system, so every post, story, and ad feels unmistakably like the brand.</p>
+          <ul class="panel-tags"><li>Visual systems</li><li>Social content</li><li>Templates</li></ul>
+        </div>
       </div>
       <div class="panel-right">
         <img src="images/mktg/mksa.png" alt="Social Assets" loading="lazy" />
@@ -276,4 +331,3 @@
  
 </body>
 </html>
- 
