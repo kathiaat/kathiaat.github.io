@@ -76,6 +76,10 @@
 }
 .wordmark .kathia { font-family: "Helvetica Neue", "Host Grotesk", Arial, sans-serif; }
 .wordmark .anaid  { font-family: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; }
+/* Equal-width halves so the gap between the names sits exactly on the page's center line */
+.wordmark { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(20px, 2.1vw, 40px); }
+.wordmark .kathia { justify-self: end; }
+.wordmark .anaid  { justify-self: start; }
     
     /* ---------- Stacking panels ---------- */
     .panels {
@@ -87,7 +91,7 @@
       top: 0;
       height: 100vh;
       display: grid;
-      grid-template-columns: 44fr 56fr;
+      grid-template-columns: 1fr 1fr;   /* 50/50 split, centered under the wordmark */
       overflow: hidden;
     }
  
