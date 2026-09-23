@@ -7,7 +7,7 @@
   <meta name="description" content="Marketing — Digital & Web Design by Kathia Anaid" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;700&family=Host+Grotesk:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;700&family=Host+Grotesk:wght@500&family=Libertinus+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -49,6 +49,20 @@
       z-index: 50;
       background: #fff;          /* solid white bar */
     }
+
+       .home-link {
+     position: fixed;
+     top: clamp(24px, 2.1vw, 40px);
+     left: clamp(24px, 6.25vw, 120px);
+     z-index: 100;
+     font-size: clamp(15px, 1.15vw, 22px);
+     letter-spacing: 0.08em;
+     font-family: "Libertinus Serif", "Times New Roman", Georgia, serif;
+     font-weight: 400;
+     color: var(--ink);
+   }
+   .home-link:hover { font-style: italic; }
+    
    .wordmark {
   display: flex;
   align-items: center;
@@ -184,18 +198,20 @@
       .panel-right { min-height: 0; }
     }
     @media (max-width: 540px) {
-      .wordmark { letter-spacing: 0.24em; gap: 18px; }
+      .wordmark { gap: 18px; }
     }
   </style>
 </head>
 <body>
+
+     <a class="home-link" href="index.html">HOME</a>
  
   <!-- Fixed wordmark -->
   <header class="site-header">
     <a href="index.html" aria-label="Home">
       <h1 class="wordmark">
-        <span>Kathia</span>
-        <span>Anaid</span>
+     <span class="kathia">KATHIA</span>
+<span class="anaid">ANAID</span>
       </h1>
     </a>
   </header>
