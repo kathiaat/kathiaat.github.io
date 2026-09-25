@@ -329,6 +329,23 @@
   </video>
   <span class="panel-right-placeholder"></span>
 </div>
+
+      <head>
+  ...
+  <style>
+    .panel-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .panel-video { display: none; }
+      .panel-right { background: url("images/mktg/mksa.png") center / cover; }
+    }
+  </style>
+</head>
  
   </div>
  
